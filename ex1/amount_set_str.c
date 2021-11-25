@@ -4,16 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include "amount_set_str.h"
-
-typedef struct amount_node{
-    char *name;
-    int amount;
-    struct amount_node* next;
-}*asNode;
-
-asNode createNode(char* name, int amount);
-void destroyList(asNode myNode);
-    
+#include "linkedList.h"
 
 
 
@@ -43,7 +34,7 @@ void asDestroy(AmountSet set)
     }
 
        destroyList(set->head);
-       free(set->iterator);
+       //free(set->iterator);
        free(set);
 }
 
@@ -54,13 +45,19 @@ AmountSet asCopy(AmountSet set)
     {
         return NULL;
     }
-    AmountSet newAs= malloc(sizeof(*newAs));
+
+    AmountSet newAs = asCreate();
     if (newAs == NULL)
     {
         return NULL;
     }
-    newAs->head = set->head;
-    newAs->iterator = set->iterator;
+
+    newAs->head = copyLinkedList(set->head);
+    if(newAs->head == NULL)
+    {
+        return NULL;
+    }
+    
     return newAs;
 }
 
@@ -97,32 +94,7 @@ AmountSet asCopy(AmountSet set)
 
 
 
-asNode createNode(char* name, int amount)
-{
-    asNode myNode = malloc(sizeof(*myNode));
-    if (myNode == NULL)
-    {
-        return NULL;
-    }
 
-    assert(name != NULL);
 
-    int len=strlen(name);
-    myNode->name = malloc((sizeof(char)*len)+1);
-    strcpy(myNode->name,name);
-    myNode->amount=amount;
-    myNode->next = NULL;
 
-    return myNode;
-}
-
-void destroyList(asNode myNode)
-{
-    while (myNode != NULL)
-    {
-        asNode nextNode = myNode->next;
-        free(myNode);
-        myNode = nextNode;
-    }
-    
-}
+//לעשות קובץ האדר וקובץ סי לנוד ולסט בנפרד??

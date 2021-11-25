@@ -2,11 +2,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 
 typedef struct amount_node{
     char *name;
-    int amount;
+    double amount;
     struct amount_node* next;
 }*asNode;
 
@@ -21,6 +22,8 @@ bool createNewAs();
 asNode createNode(char* name, int amount);
 void destroyList(asNode myNode);
 bool destroyAs();
+bool copyNull();
+bool copyGoodList();
 
 
 bool createNewAs();
@@ -40,8 +43,8 @@ bool createNewAs();
 
 int main()
 {
-    RUN_TEST_CASE(destroyNull);
-    printf("check");
+    RUN_TEST_CASE(copyGoodList);
+    printf("check\n");
     return 0;
 }
 
@@ -75,4 +78,37 @@ bool destroyAs()
     asDestroy(newSet);
 
     return true;
+}
+
+bool copyNull()
+{
+    if(asCopy(NULL) != NULL)
+    {
+        return false;
+    }
+    return true;
+}
+
+bool copyGoodList()
+{
+    AmountSet set1 = asCreate();
+    assert(set1 != NULL);
+
+    set1->head = createNode("MAOR", 1.5);
+    asNode listi = set1->head;
+    listi->next = createNode("benyamin",2.5);
+    listi = listi->next;
+    listi->next = createNode("ari",3.5);
+
+    AmountSet copiedSet=asCopy(set1);
+    asNode list2 = copiedSet->head;
+    while(list2 != NULL)
+    {
+        printf("node name is: %s, node amount is %lf.\n",list2->name,list2->amount);
+        list2 = list2->next;
+    }
+    return  true;
+     
+
+
 }
