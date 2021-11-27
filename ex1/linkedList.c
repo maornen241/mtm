@@ -13,7 +13,7 @@ struct amount_node{
 
 
 
-asNode createNode(char* name, double amount)
+asNode createNode(char* name, double* amount)
 {
     asNode myNode = malloc(sizeof(*myNode));
     if (myNode == NULL)
@@ -26,7 +26,7 @@ asNode createNode(char* name, double amount)
     int len=strlen(name);
     myNode->name = malloc((sizeof(char)*len)+1);
     strcpy(myNode->name,name);
-    myNode->amount=amount;
+    myNode->amount=*amount;
     myNode->next = NULL;
 
     return myNode;
@@ -53,7 +53,7 @@ asNode copyLinkedList(asNode source)
         return NULL;
     }
 
-    asNode newHead = createNode(source->name,source->amount);
+    asNode newHead = createNode(source->name,&(source->amount));
     if(newHead == NULL)
     {
         return NULL;
@@ -64,7 +64,7 @@ asNode copyLinkedList(asNode source)
 
     while (source != NULL)
     {   
-        currentNode->next = createNode(source->name,source->amount);
+        currentNode->next = createNode(source->name,&(source->amount));
         
         if(currentNode->next == NULL)
         {
