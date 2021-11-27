@@ -1,0 +1,1 @@
+/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0 -std=c99 --pedantic-errors -Wall -Werror -g  -rdynamic CMakeFiles/amount_set_str.dir/amount_set_str.c.o CMakeFiles/amount_set_str.dir/linkedList.c.o CMakeFiles/amount_set_str.dir/tests.c.o  -o amount_set_str 
