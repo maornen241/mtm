@@ -7,7 +7,6 @@
 #include "linkedList.h"
 
 
-
 struct AmountSet_t{
     asNode head; 
     asNode iterator;
@@ -53,14 +52,74 @@ AmountSet asCopy(AmountSet set)
     }
 
     newAs->head = copyLinkedList(set->head);
+
+    //im pretty sure this is unnecessary
+    //I think we should just return As with NULL as head
+    /**
     if(newAs->head == NULL)
     {
         return NULL;
     }
+    **/
     
     return newAs;
 }
 
+
+int asGetSize(AmountSet set)
+{
+    if(set == NULL)
+    {
+        return -1;
+    }
+
+    asNode initial_iterator_value = set->iterator;
+
+    set->iterator = set->head;
+    asNode iterator = set->iterator;
+
+    int counter = 0;
+    while (iterator != NULL)
+    {
+        counter++;
+        iterator = iterator->next;
+    }
+    
+    set->iterator = initial_iterator_value;
+
+    
+    return counter;
+}
+
+
+bool asContains(AmountSet set, const char* element)
+{
+    if(set == NULL || element == NULL)
+    {
+        return false;
+    }
+
+    asNode initial_iterator_value = set->iterator;
+
+    set->iterator = set->head;
+    asNode iterator = set->iterator;
+
+    while (iterator != NULL)
+    {
+        char* current_name = iterator->name;
+        assert(current_name != NULL);
+
+        if(strcmp(current_name,element) == 0)
+        {
+            return true;
+        }
+
+        iterator = iterator->next;
+    }
+    
+    set->iterator = initial_iterator_value;
+    return false;
+}
 
 
 
