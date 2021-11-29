@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/maorben/mtm/ex1/amount_set_str.c
-stdio.h
--
-stdlib.h
--
-stdbool.h
--
-string.h
--
-assert.h
--
-amount_set_str.h
-/home/maorben/mtm/ex1/amount_set_str.h
-linkedList.h
-/home/maorben/mtm/ex1/linkedList.h
-
 /home/maorben/mtm/ex1/amount_set_str.h
 stdio.h
 -

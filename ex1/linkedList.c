@@ -21,6 +21,10 @@ asNode createNode(char* name, double amount)
 
     int len=strlen(name);
     myNode->name = malloc((sizeof(char)*len)+1);
+    if(myNode->name == NULL)
+    {
+        return NULL;
+    }
     strcpy(myNode->name,name);
     myNode->amount=amount;
     myNode->next = NULL;
