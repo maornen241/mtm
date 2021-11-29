@@ -12,21 +12,9 @@ stdio.h
 stdbool.h
 -
 
-/home/maorben/mtm/ex1/linkedList.h
-
-/home/maorben/mtm/ex1/tests.c
-amount_set_str.h
-/home/maorben/mtm/ex1/amount_set_str.h
-linkedList.h
-/home/maorben/mtm/ex1/linkedList.h
-stdbool.h
--
+/home/maorben/mtm/ex1/external_tests.c
 stdio.h
 -
-stdlib.h
--
-assert.h
--
-string.h
--
+amount_set_str.h
+/home/maorben/mtm/ex1/amount_set_str.h
 

@@ -5,6 +5,9 @@ CMakeFiles/amount_set_str.dir/amount_set_str.c.o: /home/maorben/mtm/ex1/amount_s
 CMakeFiles/amount_set_str.dir/amount_set_str.c.o: /home/maorben/mtm/ex1/amount_set_str.h
 CMakeFiles/amount_set_str.dir/amount_set_str.c.o: /home/maorben/mtm/ex1/linkedList.h
 
+CMakeFiles/amount_set_str.dir/external_tests.c.o: /home/maorben/mtm/ex1/amount_set_str.h
+CMakeFiles/amount_set_str.dir/external_tests.c.o: /home/maorben/mtm/ex1/external_tests.c
+
 CMakeFiles/amount_set_str.dir/linkedList.c.o: /home/maorben/mtm/ex1/linkedList.c
 CMakeFiles/amount_set_str.dir/linkedList.c.o: /home/maorben/mtm/ex1/linkedList.h
 

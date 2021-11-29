@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/amount_set_str.dir/amount_set_str.c.o"
+  "CMakeFiles/amount_set_str.dir/external_tests.c.o"
   "CMakeFiles/amount_set_str.dir/linkedList.c.o"
   "CMakeFiles/amount_set_str.dir/tests.c.o"
   "amount_set_str"

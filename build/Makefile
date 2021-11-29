@@ -167,6 +167,33 @@ amount_set_str.c.s:
 	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/amount_set_str.c.s
 .PHONY : amount_set_str.c.s
 
+external_tests.o: external_tests.c.o
+
+.PHONY : external_tests.o
+
+# target to build an object file
+external_tests.c.o:
+	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/external_tests.c.o
+.PHONY : external_tests.c.o
+
+external_tests.i: external_tests.c.i
+
+.PHONY : external_tests.i
+
+# target to preprocess a source file
+external_tests.c.i:
+	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/external_tests.c.i
+.PHONY : external_tests.c.i
+
+external_tests.s: external_tests.c.s
+
+.PHONY : external_tests.s
+
+# target to generate assembly for a file
+external_tests.c.s:
+	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/external_tests.c.s
+.PHONY : external_tests.c.s
+
 linkedList.o: linkedList.c.o
 
 .PHONY : linkedList.o
@@ -233,6 +260,9 @@ help:
 	@echo "... amount_set_str.o"
 	@echo "... amount_set_str.i"
 	@echo "... amount_set_str.s"
+	@echo "... external_tests.o"
+	@echo "... external_tests.i"
+	@echo "... external_tests.s"
 	@echo "... linkedList.o"
 	@echo "... linkedList.i"
 	@echo "... linkedList.s"

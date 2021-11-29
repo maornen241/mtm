@@ -1,5 +1,5 @@
 #include "amount_set_str.h"
-#include "linkedList.h"
+#include "amount_set_str_linkedList.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,8 +16,6 @@ struct AmountSet_t{
 
 
 bool createNewAs();
-//asNode createNode(char* name, double amount);
-//void destroyList(asNode myNode);
 
 bool destroyNull();
 bool destroyAs();
@@ -65,12 +63,28 @@ bool delete_unitialized_set();
 bool delete_non_existing_element();
 bool delete_existing_elements();
 
+bool clear_null_set();
+bool clear_uninitialized_list();
+bool clear_full_set();
+
+bool get_first_null_set();
+bool get_first_unintialized_list();
+bool get_first_full_list_and_check_original_name();
+
+bool get_next_null_set();
+bool get_next_empty_list();
+bool get_next_middle_of_list();
+bool foreach_full_set();
+
+bool for_each_null_set();
+bool for_each_empty_list();
 
 
 
 
 
-#define  RUN_TEST_CASE(test_fn) \
+
+#define  RUN_TEST_CASE(test_fn)\
 {\
     if(test_fn())\
     {\
@@ -92,38 +106,45 @@ bool delete_existing_elements();
 int main()
 {
     RUN_TEST_CASE(createNewAs);
+    printf("\n");
 
     RUN_TEST_CASE(destroyNull);
     RUN_TEST_CASE(destroyAs);
+    printf("\n");
 
     RUN_TEST_CASE(copyNull);
     RUN_TEST_CASE(copyASWithNullList);
     RUN_TEST_CASE(copyGoodListWithNoIterator);
     RUN_TEST_CASE(Copy_as_and_change_copy);
+    printf("\n");
 
     RUN_TEST_CASE(getSize_of_null_as);
     RUN_TEST_CASE(getSize_of_empty_as);
     RUN_TEST_CASE(getSize_of_full_as);
     RUN_TEST_CASE(getSize_of_as_and_check_iterator_unchanged);
-    
+     printf("\n");
+
     RUN_TEST_CASE(containes_null_set);
     RUN_TEST_CASE(containes_null_element);
     RUN_TEST_CASE(contains_empty_set);
     RUN_TEST_CASE(containes_found_element);
     RUN_TEST_CASE(containes_unfound_element);
+    printf("\n");
 
     RUN_TEST_CASE(getAmount_null_set);
     RUN_TEST_CASE(getAmount_null_element);
     RUN_TEST_CASE(getAmount_null_outAmount);
     RUN_TEST_CASE(getAmount_found_element);
     RUN_TEST_CASE(getAmount_unfound_element); 
+    printf("\n");
 
     RUN_TEST_CASE(register_null_set);
     RUN_TEST_CASE(register_null_element);
     RUN_TEST_CASE(register_only_lower_case);
     RUN_TEST_CASE(register_lower_and_uuper_case);
     RUN_TEST_CASE(register_words_and_numbers);
-    
+    printf("\n");
+
     RUN_TEST_CASE(change_amount_null_set);
     RUN_TEST_CASE(change_amount_null_element);
     RUN_TEST_CASE(change_amount_with_empty_list);
@@ -131,17 +152,42 @@ int main()
     RUN_TEST_CASE(change_amount_decrease_too_low);
     RUN_TEST_CASE(change_amount_decrease);
     RUN_TEST_CASE(change_amount_increase);
+    printf("\n");
 
     RUN_TEST_CASE(delete_null_set);
     RUN_TEST_CASE(delete_null_element);
     RUN_TEST_CASE(delete_unitialized_set);
     RUN_TEST_CASE(delete_non_existing_element);
     RUN_TEST_CASE(delete_existing_elements);
+    printf("\n");
 
+    RUN_TEST_CASE(clear_null_set);
+    RUN_TEST_CASE(clear_uninitialized_list);
+    RUN_TEST_CASE(clear_full_set);
+    printf("\n");
+
+    RUN_TEST_CASE(get_first_null_set);
+    RUN_TEST_CASE(get_first_unintialized_list);
+    RUN_TEST_CASE(get_first_full_list_and_check_original_name);
+    printf("\n");
+
+    RUN_TEST_CASE(get_next_null_set);
+    RUN_TEST_CASE(get_next_empty_list);
+    RUN_TEST_CASE(get_next_middle_of_list);
+    printf("\n");
+
+    RUN_TEST_CASE(foreach_full_set);
+    RUN_TEST_CASE(for_each_empty_list);
+    RUN_TEST_CASE(for_each_null_set);
+    printf("\n");
 
     printf("All test have finished\n");
     return 0;
 }
+
+
+
+
 
 
 
@@ -915,3 +961,193 @@ bool delete_existing_elements()
     return (result1 && result2);
 }
 
+bool clear_null_set()
+{
+    if(asClear(NULL) == AS_NULL_ARGUMENT)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool clear_uninitialized_list()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+
+    bool result = (asClear(set) == AS_SUCCESS);
+    asDestroy(set);
+
+    return result;
+}
+
+bool clear_full_set()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+
+    asRegister(set, "Ma?");
+    asRegister(set, "yonez!");
+    asRegister(set, "turning");
+    asRegister(set, "tables");
+
+    asChangeAmount(set, "Ma?", 2.3);
+    asChangeAmount(set, "yonez!", 1);
+    asChangeAmount(set, "turning", 0);
+    asChangeAmount(set, "tables", 16);
+
+    bool is_succes = (AS_SUCCESS == asClear(set));
+    bool is_cleared = (set->head == NULL);
+
+    asDestroy(set);
+    return (is_cleared && is_succes);
+}
+
+bool get_first_null_set()
+{
+    if(asGetFirst(NULL) == NULL)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool get_first_unintialized_list()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+
+    bool result = (NULL == asGetFirst(set));
+    asDestroy(set);
+    return result;
+}
+
+bool get_first_full_list_and_check_original_name()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+
+    asRegister(set, "Ma?");
+    asRegister(set, "yonez!");
+
+    asChangeAmount(set, "Ma?", 2.3);
+    asChangeAmount(set, "yonez!", 1);
+
+    char* first_element = asGetFirst(set);
+
+    bool is_first_element = (strcmp("Ma?",first_element ) == 0);
+    bool is_original_copy;
+
+    first_element[0] = 'D';
+    is_original_copy = (strcmp(set->head->name,"Da?") == 0);
+
+    asDestroy(set);
+    return (is_first_element && is_original_copy);
+}
+
+bool get_next_middle_of_list()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+
+    asRegister(set, "Ma?");
+    asRegister(set, "yonez!");
+    asRegister(set, "turning");
+    asRegister(set, "tables");
+
+    asChangeAmount(set, "Ma?", 2.3);
+    asChangeAmount(set, "yonez!", 1);
+    asChangeAmount(set, "turning", 0);
+    asChangeAmount(set, "tables", 16);
+
+    asGetFirst(set);
+    char* result = asGetNext(set);
+    if(strcmp(result , "tables") == 0)
+    {
+        return true;
+    }
+    return false;
+
+}
+
+
+bool for_each_null_set()
+{
+    AS_FOREACH(char*, current, NULL)
+    {
+        return false;
+    }
+    return true;
+}
+
+bool for_each_empty_list()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+    
+    AS_FOREACH(char*, current, set)
+    {
+        asDestroy(set);
+        return false;
+    }
+    asDestroy(set);
+    return true;
+}
+
+bool foreach_full_set()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+
+    asRegister(set, "Ma?");
+    asRegister(set, "yonez!");
+    asRegister(set, "turning");
+    asRegister(set, "tables");
+
+    asChangeAmount(set, "Ma?", 2.3);
+    asChangeAmount(set, "yonez!", 1);
+    asChangeAmount(set, "turning", 0);
+    asChangeAmount(set, "tables", 16);
+
+    char* check_arr[4] = {"Ma?", "tables", "turning", "yonez!" };
+    int i = 0;
+
+    AS_FOREACH(char*, current_name, set)
+    {
+        if(strcmp(check_arr[i], current_name) != 0)
+        {
+            asDestroy(set);
+            return false;
+        }
+        i++;
+    }
+
+    if(asGetNext(set) != NULL)
+    {
+        asDestroy(set);
+        return false;        
+    }
+
+    asDestroy(set);
+    return true;
+}
+
+bool get_next_null_set()
+{
+    char* result = asGetNext(NULL);
+    if(result == NULL)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool get_next_empty_list()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+    
+    bool result = (NULL == asGetNext(set));
+    asDestroy(set);
+    return result;
+}

@@ -33,7 +33,6 @@ void asDestroy(AmountSet set)
     }
 
        destroyList(set->head);
-       //free(set->iterator);
        free(set);
 }
 
@@ -156,11 +155,16 @@ AmountSetResult asRegister(AmountSet set, const char* element)
 
 
     char* copied_element = malloc(strlen(element)*sizeof(char));
+    if(copied_element == NULL)
+    {
+        return AS_OUT_OF_MEMORY;
+    }
+
     strcpy(copied_element, element); 
     asNode between = createNode(copied_element, 0);
     if(between == NULL)
     {
-        return AS_NULL_ARGUMENT;
+        return AS_OUT_OF_MEMORY;
     }
 
     //if the linked list is empty
@@ -191,7 +195,6 @@ AmountSetResult asRegister(AmountSet set, const char* element)
     previous->next = between;
     between->next = after;
     return AS_SUCCESS;
-
     
 }
 
@@ -267,26 +270,46 @@ AmountSetResult asDelete(AmountSet set, const char* element)
 
 
 
-/**AmountSetResult asClear(AmountSet set)
+AmountSetResult asClear(AmountSet set)
 {
     if(set == NULL)
     {
         return AS_NULL_ARGUMENT;
     }
-    destroyList(set->head);
-    //if((set->head) == NULL) // didnt decide if the check is needed.
-    //{
-        return AS_SUCCESS;
-    //}
-    //return AS_OUT_OF_MEMORY; 
-}
 
+    destroyList(set->head);
+    set->head = NULL;
+    set->iterator = NULL;
+    return AS_SUCCESS; 
+}
 
 
 char* asGetFirst(AmountSet set)
 {
-    
-}*/
+    if(set == NULL || set->head == NULL)
+    {
+        return NULL;
+    }
+
+    set->iterator = set->head;
+    return set->iterator->name; 
+}
+
+char* asGetNext(AmountSet set)
+{
+    if(set == NULL || set->head == NULL|| set->iterator == NULL || set->iterator->next == NULL)
+    {
+        return NULL;
+    }
+
+    //*******************************************************************
+    //how do we check if iterator is invalid?? what does it meen at all??
+    //*******************************************************************
+
+    set->iterator = set->iterator->next;
+    return set->iterator->name; 
+}
+
 
 
 

@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/home/maorben/mtm/ex1/amount_set_str.c" "/home/maorben/mtm/build/CMakeFiles/amount_set_str.dir/amount_set_str.c.o"
+  "/home/maorben/mtm/ex1/external_tests.c" "/home/maorben/mtm/build/CMakeFiles/amount_set_str.dir/external_tests.c.o"
   "/home/maorben/mtm/ex1/linkedList.c" "/home/maorben/mtm/build/CMakeFiles/amount_set_str.dir/linkedList.c.o"
   "/home/maorben/mtm/ex1/tests.c" "/home/maorben/mtm/build/CMakeFiles/amount_set_str.dir/tests.c.o"
   )

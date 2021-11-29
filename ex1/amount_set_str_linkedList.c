@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <assert.h>
-#include "linkedList.h"
+#include "amount_set_str_linkedList.h"
 
 
 
@@ -43,7 +43,7 @@ void destroyList(asNode myNode)
         free(myNode);
         myNode = nextNode;
     }
-    myNode =NULL;
+    //myNode = NULL;
     
 }
 
