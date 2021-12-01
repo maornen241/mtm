@@ -41,5 +41,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/amount_set_str.dir/DependInfo.cmake"
+  "CMakeFiles/amount_set_str_main.dir/DependInfo.cmake"
   )

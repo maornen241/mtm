@@ -1,5 +1,5 @@
-#ifndef _AMOUNT_NODE_H
-#define _AMOUNT_NODE_H
+#ifndef _AMOUNT_SET_STR_LINKEDLIST_H
+#define _AMOUNT_SET_STR_LINKEDLIST_H
 
 typedef struct amount_node{
     char *name;
@@ -10,41 +10,6 @@ typedef struct amount_node{
 asNode createNode(char* name, double amount);
 void destroyList(asNode myNode);
 asNode copyLinkedList(asNode source);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif

@@ -37,9 +37,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "amount_set_str::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-amount_set_str-Debug-8e773da0fe75a1c3c0ba.json",
-					"name" : "amount_set_str",
+					"id" : "amount_set_str_main::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-amount_set_str_main-Debug-ad31366ffedb0138c57f.json",
+					"name" : "amount_set_str_main",
 					"projectIndex" : 0
 				}
 			]

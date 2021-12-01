@@ -1,22 +1,22 @@
 [
 {
   "directory": "/home/maorben/mtm/build",
-  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str.dir/amount_set_str.c.o   -c /home/maorben/mtm/ex1/amount_set_str.c",
+  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str_main.dir/amount_set_str_main.c.o   -c /home/maorben/mtm/ex1/amount_set_str_main.c",
+  "file": "/home/maorben/mtm/ex1/amount_set_str_main.c"
+},
+{
+  "directory": "/home/maorben/mtm/build",
+  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str_main.dir/amount_set_str.c.o   -c /home/maorben/mtm/ex1/amount_set_str.c",
   "file": "/home/maorben/mtm/ex1/amount_set_str.c"
 },
 {
   "directory": "/home/maorben/mtm/build",
-  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str.dir/linkedList.c.o   -c /home/maorben/mtm/ex1/linkedList.c",
-  "file": "/home/maorben/mtm/ex1/linkedList.c"
+  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str_main.dir/amount_set_str_linkedList.c.o   -c /home/maorben/mtm/ex1/amount_set_str_linkedList.c",
+  "file": "/home/maorben/mtm/ex1/amount_set_str_linkedList.c"
 },
 {
   "directory": "/home/maorben/mtm/build",
-  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str.dir/tests.c.o   -c /home/maorben/mtm/ex1/tests.c",
-  "file": "/home/maorben/mtm/ex1/tests.c"
-},
-{
-  "directory": "/home/maorben/mtm/build",
-  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str.dir/external_tests.c.o   -c /home/maorben/mtm/ex1/external_tests.c",
-  "file": "/home/maorben/mtm/ex1/external_tests.c"
+  "command": "/usr/local/bin/x86_64-unknown-linux-gnu-gcc-5.5.0   -std=c99 --pedantic-errors -Wall -Werror -g   -o CMakeFiles/amount_set_str_main.dir/amount_set_str_tests.c.o   -c /home/maorben/mtm/ex1/amount_set_str_tests.c",
+  "file": "/home/maorben/mtm/ex1/amount_set_str_tests.c"
 }
 ]

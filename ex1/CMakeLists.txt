@@ -19,4 +19,4 @@ set(CMAKE_C_FLAGS ${MTM_FLAGS_DEBUG})
 # Add the names of your source files here
 #set(C_FILES "<YOURFILENAMES>")
 
-add_executable(amount_set_str amount_set_str.c linkedList.c tests.c external_tests.c)
+add_executable(amount_set_str_main amount_set_str_main.c amount_set_str.c amount_set_str_linkedList.c  amount_set_str_tests.c)

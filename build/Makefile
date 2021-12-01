@@ -128,17 +128,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named amount_set_str
+# Target rules for targets named amount_set_str_main
 
 # Build rule for target.
-amount_set_str: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 amount_set_str
-.PHONY : amount_set_str
+amount_set_str_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 amount_set_str_main
+.PHONY : amount_set_str_main
 
 # fast build rule for target.
-amount_set_str/fast:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/build
-.PHONY : amount_set_str/fast
+amount_set_str_main/fast:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/build
+.PHONY : amount_set_str_main/fast
 
 amount_set_str.o: amount_set_str.c.o
 
@@ -146,7 +146,7 @@ amount_set_str.o: amount_set_str.c.o
 
 # target to build an object file
 amount_set_str.c.o:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/amount_set_str.c.o
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str.c.o
 .PHONY : amount_set_str.c.o
 
 amount_set_str.i: amount_set_str.c.i
@@ -155,7 +155,7 @@ amount_set_str.i: amount_set_str.c.i
 
 # target to preprocess a source file
 amount_set_str.c.i:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/amount_set_str.c.i
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str.c.i
 .PHONY : amount_set_str.c.i
 
 amount_set_str.s: amount_set_str.c.s
@@ -164,89 +164,89 @@ amount_set_str.s: amount_set_str.c.s
 
 # target to generate assembly for a file
 amount_set_str.c.s:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/amount_set_str.c.s
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str.c.s
 .PHONY : amount_set_str.c.s
 
-external_tests.o: external_tests.c.o
+amount_set_str_linkedList.o: amount_set_str_linkedList.c.o
 
-.PHONY : external_tests.o
-
-# target to build an object file
-external_tests.c.o:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/external_tests.c.o
-.PHONY : external_tests.c.o
-
-external_tests.i: external_tests.c.i
-
-.PHONY : external_tests.i
-
-# target to preprocess a source file
-external_tests.c.i:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/external_tests.c.i
-.PHONY : external_tests.c.i
-
-external_tests.s: external_tests.c.s
-
-.PHONY : external_tests.s
-
-# target to generate assembly for a file
-external_tests.c.s:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/external_tests.c.s
-.PHONY : external_tests.c.s
-
-linkedList.o: linkedList.c.o
-
-.PHONY : linkedList.o
+.PHONY : amount_set_str_linkedList.o
 
 # target to build an object file
-linkedList.c.o:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/linkedList.c.o
-.PHONY : linkedList.c.o
+amount_set_str_linkedList.c.o:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_linkedList.c.o
+.PHONY : amount_set_str_linkedList.c.o
 
-linkedList.i: linkedList.c.i
+amount_set_str_linkedList.i: amount_set_str_linkedList.c.i
 
-.PHONY : linkedList.i
+.PHONY : amount_set_str_linkedList.i
 
 # target to preprocess a source file
-linkedList.c.i:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/linkedList.c.i
-.PHONY : linkedList.c.i
+amount_set_str_linkedList.c.i:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_linkedList.c.i
+.PHONY : amount_set_str_linkedList.c.i
 
-linkedList.s: linkedList.c.s
+amount_set_str_linkedList.s: amount_set_str_linkedList.c.s
 
-.PHONY : linkedList.s
+.PHONY : amount_set_str_linkedList.s
 
 # target to generate assembly for a file
-linkedList.c.s:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/linkedList.c.s
-.PHONY : linkedList.c.s
+amount_set_str_linkedList.c.s:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_linkedList.c.s
+.PHONY : amount_set_str_linkedList.c.s
 
-tests.o: tests.c.o
+amount_set_str_main.o: amount_set_str_main.c.o
 
-.PHONY : tests.o
+.PHONY : amount_set_str_main.o
 
 # target to build an object file
-tests.c.o:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/tests.c.o
-.PHONY : tests.c.o
+amount_set_str_main.c.o:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_main.c.o
+.PHONY : amount_set_str_main.c.o
 
-tests.i: tests.c.i
+amount_set_str_main.i: amount_set_str_main.c.i
 
-.PHONY : tests.i
+.PHONY : amount_set_str_main.i
 
 # target to preprocess a source file
-tests.c.i:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/tests.c.i
-.PHONY : tests.c.i
+amount_set_str_main.c.i:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_main.c.i
+.PHONY : amount_set_str_main.c.i
 
-tests.s: tests.c.s
+amount_set_str_main.s: amount_set_str_main.c.s
 
-.PHONY : tests.s
+.PHONY : amount_set_str_main.s
 
 # target to generate assembly for a file
-tests.c.s:
-	$(MAKE) -f CMakeFiles/amount_set_str.dir/build.make CMakeFiles/amount_set_str.dir/tests.c.s
-.PHONY : tests.c.s
+amount_set_str_main.c.s:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_main.c.s
+.PHONY : amount_set_str_main.c.s
+
+amount_set_str_tests.o: amount_set_str_tests.c.o
+
+.PHONY : amount_set_str_tests.o
+
+# target to build an object file
+amount_set_str_tests.c.o:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_tests.c.o
+.PHONY : amount_set_str_tests.c.o
+
+amount_set_str_tests.i: amount_set_str_tests.c.i
+
+.PHONY : amount_set_str_tests.i
+
+# target to preprocess a source file
+amount_set_str_tests.c.i:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_tests.c.i
+.PHONY : amount_set_str_tests.c.i
+
+amount_set_str_tests.s: amount_set_str_tests.c.s
+
+.PHONY : amount_set_str_tests.s
+
+# target to generate assembly for a file
+amount_set_str_tests.c.s:
+	$(MAKE) -f CMakeFiles/amount_set_str_main.dir/build.make CMakeFiles/amount_set_str_main.dir/amount_set_str_tests.c.s
+.PHONY : amount_set_str_tests.c.s
 
 # Help Target
 help:
@@ -256,19 +256,19 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... amount_set_str"
+	@echo "... amount_set_str_main"
 	@echo "... amount_set_str.o"
 	@echo "... amount_set_str.i"
 	@echo "... amount_set_str.s"
-	@echo "... external_tests.o"
-	@echo "... external_tests.i"
-	@echo "... external_tests.s"
-	@echo "... linkedList.o"
-	@echo "... linkedList.i"
-	@echo "... linkedList.s"
-	@echo "... tests.o"
-	@echo "... tests.i"
-	@echo "... tests.s"
+	@echo "... amount_set_str_linkedList.o"
+	@echo "... amount_set_str_linkedList.i"
+	@echo "... amount_set_str_linkedList.s"
+	@echo "... amount_set_str_main.o"
+	@echo "... amount_set_str_main.i"
+	@echo "... amount_set_str_main.s"
+	@echo "... amount_set_str_tests.o"
+	@echo "... amount_set_str_tests.i"
+	@echo "... amount_set_str_tests.s"
 .PHONY : help
 
 

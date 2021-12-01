@@ -4,7 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include "amount_set_str.h"
-#include "linkedList.h"
+#include "amount_set_str_linkedList.h"
 
 
 struct AmountSet_t{
@@ -44,13 +44,13 @@ AmountSet asCopy(AmountSet set)
         return NULL;
     }
 
-    AmountSet newAs = asCreate();
-    if (newAs == NULL)
+    AmountSet new_as = asCreate();
+    if (new_as == NULL)
     {
         return NULL;
     }
 
-    newAs->head = copyLinkedList(set->head);
+    new_as->head = copyLinkedList(set->head);
 
     //im pretty sure this is unnecessary
     //I think we should just return As with NULL as head
@@ -61,7 +61,7 @@ AmountSet asCopy(AmountSet set)
     }
     **/
     
-    return newAs;
+    return new_as;
 }
 
 
@@ -154,7 +154,7 @@ AmountSetResult asRegister(AmountSet set, const char* element)
     }
 
 
-    char* copied_element = malloc(strlen(element)*sizeof(char));
+    char* copied_element = (char*) malloc((strlen(element)*sizeof(char))+1);
     if(copied_element == NULL)
     {
         return AS_OUT_OF_MEMORY;
@@ -162,8 +162,10 @@ AmountSetResult asRegister(AmountSet set, const char* element)
 
     strcpy(copied_element, element); 
     asNode between = createNode(copied_element, 0);
+    free(copied_element);
     if(between == NULL)
     {
+        free(copied_element);
         return AS_OUT_OF_MEMORY;
     }
 
@@ -179,6 +181,7 @@ AmountSetResult asRegister(AmountSet set, const char* element)
     {
         between->next = set->head;
         set->head = between;
+        return AS_SUCCESS;
     }
 
 
