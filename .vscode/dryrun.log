@@ -1,0 +1,22 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/home/maorben/mtm'
+make: Leaving directory `/home/maorben/mtm'
+ 
+make: *** No rule to make target `matamikya.c', needed by `matamikya.o'.
+make: *** No rule to make target `matamikya_print.h', needed by `matamikya.o'.
+make: *** No rule to make target `matamikya.h', needed by `matamikya.o'.
+make: *** No rule to make target `amount_set.h', needed by `matamikya.o'.
+make: *** No rule to make target `set.h', needed by `matamikya.o'.
+make: *** No rule to make target `matamikya_product.h', needed by `matamikya.o'.
+make: *** No rule to make target `matamikya_order.h', needed by `matamikya.o'.
+make: *** No rule to make target `list.h', needed by `matamikya.o'.
+make: *** No rule to make target `matamikya_main.c', needed by `matamikya_main.o'.
+make: *** No rule to make target `matamikya_tests.h', needed by `matamikya_main.o'.
+make: *** No rule to make target `test_utilities.h', needed by `matamikya_main.o'.
+make: *** No rule to make target `matamikya_order.c', needed by `matamikya_order.o'.
+make: *** No rule to make target `matamikya_print.c', needed by `matamikya_print.o'.
+make: *** No rule to make target `matamikya_product.c', needed by `matamikya_product.o'.
+make: *** No rule to make target `matamikya_tests.c', needed by `matamikya_tests.o'.
+make: *** No rule to make target `libas.a', needed by `matamikya'.
+make: *** No rule to make target `libmtm.a', needed by `matamikya'.
+ 

@@ -11,8 +11,11 @@
                 "-Wall", 
                 "-pedantic-errors", 
                 "-Werror", 
-                "-DNDEBUG", 
-                "${fileDirname}/*.c",
+                "-DNDEBUG",
+                "-lm", 
+                "${fileDirname}/matamikya*.c",
+                "${fileDirname}/libmtm.a", 
+                "${fileDirname}/libas.a", 
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

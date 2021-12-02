@@ -1,0 +1,378 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.82
+# Built for x86_64-redhat-linux-gnu
+# Copyright (C) 2010  Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Fri Dec  3 00:00:18 2021
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# default
+.SHELLFLAGS := -c
+# environment
+QTDIR = /usr/lib64/qt-3.3
+# environment
+VSCODE_AGENT_FOLDER = /home/maorben/.vscode-server
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# default
+MAKE_VERSION := 3.82
+# makefile
+CURDIR := /home/maorben/mtm
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# environment
+HISTCONTROL = ignoredups
+# environment
+XDG_DATA_DIRS = /home/maorben/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+LESSOPEN = ||/usr/bin/lesspipe.sh %s
+# environment
+VSCODE_CWD = /home/maorben
+# environment
+SSH_CONNECTION = 77.137.179.35 2085 132.68.32.76 22
+# environment
+PATH = /home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/bin:/usr/bin/:/home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/bin:/usr/lib64/qt-3.3/bin:/usr/bin/:/usr/local/bin:/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/sbin:/usr/local/pgsql/bin:/home/maorben/bin
+# environment
+QT_GRAPHICSSYSTEM_CHECKED = 1
+# environment
+XDG_RUNTIME_DIR = /run/user/20672
+# environment
+VSCODE_LOG_STACK = false
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver check-symlink
+# makefile (from `Makefile', line 1)
+COMP_FLAG = -std=c99 -Wall -pedantic-errors -Werror -DNDEBUG 
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/maorben/mtm
+# environment
+VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-71daf6c6-2b2b-41cf-84b0-debd166529fe.sock
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/server/remoteExtensionHostProcess
+# environment
+HOME = /home/maorben
+# environment
+LD_LIBRARY_PATH = :/usr/local/pgsql/lib:/usr/local/pgsql/lib
+# environment
+LOGNAME = maorben
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
++F = $(notdir $+)
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+HOSTNAME = csl3
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 5
+# environment
+XDG_SESSION_ID = 4904
+# environment
+USER = maorben
+# environment
+QTLIB = /usr/lib64/qt-3.3/lib
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# environment
+SSH_CLIENT = 77.137.179.35 2085 22
+# environment
+MAIL = /var/spool/mail/maorben
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+BROWSER = /home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/bin/helpers/browser.sh
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+HISTSIZE = 1000
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/remote/node_modules
+# environment
+QTINC = /usr/lib64/qt-3.3/include
+# default
+.RECIPEPREFIX := 
+# makefile
+.DEFAULT_GOAL := matamikya
+# environment
+LANG = C
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# variable set hash-table stats:
+# Load=71/1024=7%, Rehash=0, Collisions=9/93=10%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 46, inode 97946662): 10 files, no impossibilities.
+
+# 10 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+matamikya_main.o: matamikya_main.c matamikya_tests.h test_utilities.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 11):
+	gcc -c $(COMP_FLAG) matamikya_main.c
+
+matamikya_order.o: matamikya_order.c matamikya_order.h matamikya_product.h matamikya.h amount_set.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 14):
+	gcc -c $(COMP_FLAG) matamikya_order.c
+
+# Not a target:
+matamikya_print.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+matamikya_product.o: matamikya_product.c matamikya_product.h matamikya.h amount_set.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 20):
+	gcc -c $(COMP_FLAG) matamikya_product.c	
+
+# Not a target:
+list.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_tests.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2021-12-02 23:52:02.029
+#  File has been updated.
+#  Successfully updated.
+
+matamikya: matamikya.o matamikya_main.o matamikya_order.o matamikya_print.o matamikya_product.o matamikya_tests.o libas.a libmtm.a
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 5):
+	gcc matamikya.o matamikya_main.o matamikya_order.o matamikya_print.o matamikya_product.o matamikya_tests.o libas.a libmtm.a -lm -o matamikya
+
+# Not a target:
+libmtm.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+matamikya.o: matamikya.c matamikya_print.h matamikya.h amount_set.h set.h matamikya_product.h matamikya_order.h list.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 8):
+	gcc -c $(COMP_FLAG) matamikya.c
+
+# Not a target:
+test_utilities.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_main.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_order.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_tests.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_product.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_order.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libas.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+matamikya_print.o: matamikya_print.c matamikya_print.h
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 17):
+	gcc -c $(COMP_FLAG) matamikya_print.c
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_product.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 27):
+	rm -rf 	matamikya.o matamikya_main.o matamikya_order.o matamikya_print.o matamikya_product.o matamikya_tests.o
+
+# Not a target:
+amount_set.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+set.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+matamikya_print.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+matamikya_tests.o: matamikya_tests.c matamikya_tests.h matamikya.h test_utilities.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from `Makefile', line 23):
+	gcc -c $(COMP_FLAG) matamikya_tests.c	
+
+# files hash-table stats:
+# Load=29/1024=3%, Rehash=0, Collisions=1/79=1%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 0 / lookups = 69 / hits = 69
+# # of strcache buffers: 1 (* 8176 B/buffer = 8176 B)
+# strcache used: total = 0 (488) / max = 0 / min = 8176 / avg = 0
+# strcache free: total = 0 (7688) / max = 0 / min = 8176 / avg = 0
+
+# strcache hash-table stats:
+# Load=40/8192=0%, Rehash=0, Collisions=1/69=1%
+# Finished Make data base on Fri Dec  3 00:00:18 2021
+
+ 
+make: *** No rule to make target `all'.  Stop.
+ 
