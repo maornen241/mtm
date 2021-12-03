@@ -47,6 +47,7 @@ Order OrderCreate()
     {
         return NULL;
     }
+    order->order_id =0;
 
     order->items = asCreate(ItemIdCopy, ItemIdFree, ItemIdCompare);
     if(order->items == NULL)

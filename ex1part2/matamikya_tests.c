@@ -100,5 +100,51 @@ bool testModifyProducts() {
     return true;
 }
 
+static void makeInventory(Matamikya mtm) {
+    double basePrice = 8.9;
+    mtmNewProduct(mtm, 4, "Tomato", 2019.11, MATAMIKYA_ANY_AMOUNT, &basePrice, copyDouble,
+                  freeDouble, simplePrice);
+    basePrice = 5.8;
+    mtmNewProduct(mtm, 6, "Onion", 1789.75, MATAMIKYA_ANY_AMOUNT, &basePrice, copyDouble,
+                  freeDouble, buy10Get10ForFree);
+    basePrice = 2000;
+    mtmNewProduct(mtm, 10, "Television", 15, MATAMIKYA_INTEGER_AMOUNT, &basePrice,
+                  copyDouble, freeDouble, simplePrice);
+    basePrice = 5000;
+    mtmNewProduct(mtm, 11, "Smart TV", 4, MATAMIKYA_INTEGER_AMOUNT, &basePrice,
+                  copyDouble, freeDouble, simplePrice);
+    basePrice = 18.5;
+    mtmNewProduct(mtm, 7, "Watermelon", 24.5, MATAMIKYA_HALF_INTEGER_AMOUNT, &basePrice,
+                  copyDouble, freeDouble, simplePrice);
+}
+
+bool testModifyOrders() {
+    Matamikya mtm = matamikyaCreate();
+    makeInventory(mtm);
+
+    unsigned int order1 = mtmCreateNewOrder(mtm);
+    ASSERT_OR_DESTROY(order1 > 0);
+    ASSERT_OR_DESTROY(MATAMIKYA_SUCCESS ==
+                      mtmChangeProductAmountInOrder(mtm, order1, 11, 1.0));
+    ASSERT_OR_DESTROY(MATAMIKYA_PRODUCT_NOT_EXIST ==
+                      mtmChangeProductAmountInOrder(mtm, order1, 15, 1.0));
+    ASSERT_OR_DESTROY(MATAMIKYA_INVALID_AMOUNT ==
+                      mtmChangeProductAmountInOrder(mtm, order1, 11, 1.2));
+
+    unsigned int order2 = mtmCreateNewOrder(mtm);
+    ASSERT_OR_DESTROY(order2 > 0);
+    ASSERT_OR_DESTROY(MATAMIKYA_SUCCESS ==
+                      mtmChangeProductAmountInOrder(mtm, order2, 6, 10.25));
+    ASSERT_OR_DESTROY(MATAMIKYA_SUCCESS ==
+                      mtmChangeProductAmountInOrder(mtm, order2, 7, 1.5));
+    ASSERT_OR_DESTROY(MATAMIKYA_SUCCESS == mtmCancelOrder(mtm, order1));
+    ASSERT_OR_DESTROY(MATAMIKYA_SUCCESS ==
+                      mtmChangeProductAmountInOrder(mtm, order2, 10, 2.0));
+    ASSERT_OR_DESTROY(MATAMIKYA_SUCCESS == mtmShipOrder(mtm, order2));
+
+    matamikyaDestroy(mtm);
+    return true;
+}
+
 
 

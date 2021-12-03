@@ -12,15 +12,18 @@
 #include <string.h>
 #include <math.h>
 
+
 static bool is_amount_compatible(const double amount, const MatamikyaAmountType amountType);
 static bool is_int_amount_valid(double amount);
 static bool is_half_int_amount_valid(double amount);
 static Product getProduct_from_id(AmountSet inventory, unsigned int id);
+static Order get_order_from_id(Set orders, unsigned int id);
 
 
 
 #define ALLOWED_ERROR 0.001
 #define HALF_ERROR 0.5
+#define ORDER_ERROR 0
 
 
 #define ABS(x) ((x) >= 0) ? (x) : (-x)
@@ -77,11 +80,6 @@ void matamikyaDestroy(Matamikya matamikya)
     free(matamikya);
 }
 
-
-
- /**ASSERT_OR_DESTROY(MATAMIKYA_SUCCESS ==
-                      mtmNewProduct(mtm, 4, "Tomato", 2019.11, MATAMIKYA_ANY_AMOUNT,
-                                    &basePrice, copyDouble, freeDouble, simplePrice));*/
 
 
 
@@ -177,23 +175,8 @@ MatamikyaResult mtmChangeProductAmount(Matamikya matamikya, const unsigned int i
 
 
 
-/**
- * mtmClearProduct: clear a product from a Matamikya warehouse.
- *
- * The entire amount of the product is removed, and the product is erased
- * completely from the warehouse, from all existing orders and from the
- * 'income' mechanism(holding the profits for each existing product).
- * For example, after clearing a product with
- * mtmClearProduct, calling mtmChangeProductAmount on that product will fail.
- *
- * @param matamikya - warehouse to remove the product from.
- * @param id - id of product to be removed.
- * @return
- *     MATAMIKYA_NULL_ARGUMENT - if a NULL argument is passed.
- *     MATAMIKYA_PRODUCT_NOT_EXIST - if matamikya does not contain a product with
- *         the given id.
- *     MATAMIKYA_SUCCESS - if product was cleared successfully.
- */
+
+ 
 MatamikyaResult mtmClearProduct(Matamikya matamikya, const unsigned int id)
 {
     if(matamikya == NULL || matamikya->inventory == NULL)
@@ -224,6 +207,147 @@ MatamikyaResult mtmClearProduct(Matamikya matamikya, const unsigned int id)
     return MATAMIKYA_SUCCESS;
 
 }
+
+/**
+ * mtmCreateNewOrder: create a new empty order in a Matamikya warehouse, and
+ * return the order's id.
+ *
+ * @param matamikya - a Matamikya warehouse
+ * @return
+ *     Positive id of the new order, if successful.
+ *     0 in case of failure.
+ */
+unsigned int mtmCreateNewOrder(Matamikya matamikya)
+{
+    if(matamikya == NULL || matamikya->orders ==  NULL)
+    {
+        return ORDER_ERROR;
+    }
+
+    unsigned int max_id = 0;
+    SET_FOREACH(Order, current_order, matamikya->orders)
+    {
+        if(current_order->order_id >= max_id)
+        {
+            max_id = current_order->order_id; 
+        }
+    }
+    unsigned int new_id = (max_id+1);
+
+    Order new_order = OrderCreate();
+    if(new_order == NULL)
+    {
+        return ORDER_ERROR;
+    }
+    new_order->order_id = new_id;
+
+    SetResult result = setAdd(matamikya->orders,new_order);
+    OrderDestroy(new_order);
+
+    if(result != SET_SUCCESS)
+    {
+        return ORDER_ERROR;
+    }
+
+    return new_id;
+
+    
+}
+
+
+
+
+MatamikyaResult mtmChangeProductAmountInOrder(Matamikya matamikya, const unsigned int orderId,
+                                     const unsigned int productId, const double amount)
+
+{
+    if(matamikya == NULL || matamikya->orders == NULL)
+    {
+        return  MATAMIKYA_NULL_ARGUMENT;
+    }
+
+   
+    Order order_to_change = get_order_from_id(matamikya->orders,  orderId);
+
+    //no such order
+    if(order_to_change == NULL)
+    {
+        return MATAMIKYA_ORDER_NOT_EXIST; 
+    }
+
+    Product product_in_inventory = getProduct_from_id(matamikya->inventory, productId);
+
+    //no such product in warehouse
+    if(product_in_inventory == NULL)
+    {
+        return MATAMIKYA_PRODUCT_NOT_EXIST;
+    }
+
+    if(!is_amount_compatible(amount, product_in_inventory->amount_type))
+    {
+        return MATAMIKYA_INVALID_AMOUNT;
+    }
+
+
+    unsigned int* ptr_copied_productId = NULL;
+    *ptr_copied_productId = productId;//productId is const so we need to copy it
+
+    double current_item_amount;
+    AmountSetResult get_amount_result  = 
+                asGetAmount(order_to_change->items, ptr_copied_productId, &current_item_amount);
+
+    //no item in order
+    if( get_amount_result == AS_ITEM_DOES_NOT_EXIST )
+    {
+        if(amount <= 0)
+        {
+            return MATAMIKYA_SUCCESS;
+        }
+        
+        // if amount positive add item
+        AmountSetResult register_result = asRegister(order_to_change->items, ptr_copied_productId);
+        AmountSetResult change_result = asChangeAmount(order_to_change->items, ptr_copied_productId, amount);
+        if(register_result == AS_SUCCESS && change_result == AS_SUCCESS)
+        {
+            return MATAMIKYA_SUCCESS;
+        }
+       
+    }
+    
+        /*
+        if we got here item exits in order
+        */
+
+        if(current_item_amount + amount <= 0)
+        {
+            if( AS_SUCCESS == asDelete(order_to_change->items, ptr_copied_productId))
+            {
+                return MATAMIKYA_SUCCESS;
+            }
+        }
+        
+       
+        else
+        {
+           if(AS_SUCCESS ==  asChangeAmount(order_to_change->items, ptr_copied_productId, amount))
+           {
+           return MATAMIKYA_SUCCESS;
+           }
+        }
+        return AS_SUCCESS;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -357,14 +481,38 @@ static Product getProduct_from_id(AmountSet inventory, unsigned int id)
         return NULL;
     }
 
-    Product product_to_change = NULL;
+    Product product = NULL;
     AS_FOREACH(Product, current_product, inventory)
     {
         if(current_product->product_id == id)
         {
-           product_to_change = current_product;
+           product = current_product;
            break;
         }
     }
-    return product_to_change;
+    return product;
 }
+
+
+//returns pointer (not a copy) to a product with a given id from a given inventory
+//if inventory has no such product, returns NULL
+//if NULL was given in the parameter orders  returns NULL
+static Order get_order_from_id(Set orders, unsigned int id)
+{
+    if(orders == NULL)
+    {
+        return NULL;
+    }
+
+    Order order = NULL;
+    SET_FOREACH(Order, current_order, orders)
+    {
+        if(current_order->order_id == id)
+        {
+           order = current_order;
+           break;
+        }
+    }
+    return order;
+}
+
