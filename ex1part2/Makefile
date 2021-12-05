@@ -24,7 +24,7 @@ matamikya_tests.o: matamikya_tests.c matamikya_tests.h matamikya.h test_utilitie
 
 
 clean:
-	rm -rf 	matamikya.o matamikya_main.o matamikya_order.o matamikya_print.o matamikya_product.o matamikya_tests.o
+	rm -rf 	matamikya.o matamikya_main.o matamikya_order.o matamikya_print.o matamikya_product.o matamikya_tests.o matamikya
 
 
 

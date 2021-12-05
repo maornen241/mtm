@@ -6,14 +6,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define INVENTORY_OUT_FILE "tests/printed_inventory.txt"
-#define INVENTORY_TEST_FILE "tests/expected_inventory.txt"
-#define ORDER_OUT_FILE "tests/printed_order.txt"
-#define ORDER_TEST_FILE "tests/expected_order.txt"
-#define BEST_SELLING_OUT_FILE "tests/printed_best_selling.txt"
-#define BEST_SELLING_TEST_FILE "tests/expected_best_selling.txt"
-#define NO_SELLING_OUT_FILE "tests/printed_no_selling.txt"
-#define NO_SELLING_TEST_FILE "tests/expected_no_selling.txt"
+#define INVENTORY_OUT_FILE "printed_inventory.txt"
+#define INVENTORY_TEST_FILE "expected_inventory.txt"
+#define ORDER_OUT_FILE "printed_order.txt"
+#define ORDER_TEST_FILE "expected_order.txt"
+#define BEST_SELLING_OUT_FILE "printed_best_selling.txt"
+#define BEST_SELLING_TEST_FILE "expected_best_selling.txt"
+#define NO_SELLING_OUT_FILE "printed_no_selling.txt"
+#define NO_SELLING_TEST_FILE "expected_no_selling.txt"
 
 #define ASSERT_OR_DESTROY(expr) ASSERT_TEST_WITH_FREE((expr), matamikyaDestroy(mtm))
 
@@ -146,5 +146,106 @@ bool testModifyOrders() {
     return true;
 }
 
+static bool fileEqual(FILE *file1, FILE *file2) {
+    int c1, c2;
+    do {
+        c1 = fgetc(file1);
+        c2 = fgetc(file2);
+    } while (c1 != EOF && c2 != EOF && c1 == c2);
+    return (c1 == EOF && c2 == EOF);
+}
 
+static bool wholeFileEqual(const char *filename1, const char *filename2) {
+    FILE *file1 = fopen(filename1, "r");
+    FILE *file2 = fopen(filename2, "r");
+    assert(file1);
+    assert(file2);
+    bool result = fileEqual(file1, file2);
+    fclose(file1);
+    fclose(file2);
+    return result;
+}
 
+bool testPrintInventory() {
+    Matamikya mtm = matamikyaCreate();
+    makeInventory(mtm);
+    FILE *outputFile = fopen(INVENTORY_OUT_FILE, "w");
+    assert(outputFile);
+    ASSERT_OR_DESTROY(mtmPrintInventory(mtm, outputFile) == MATAMIKYA_SUCCESS);
+    fclose(outputFile);
+    ASSERT_OR_DESTROY(wholeFileEqual(INVENTORY_TEST_FILE, INVENTORY_OUT_FILE));
+    matamikyaDestroy(mtm);
+    return true;
+}
+
+static unsigned int makeOrder(Matamikya mtm) {
+    makeInventory(mtm);
+    unsigned int id = mtmCreateNewOrder(mtm);
+    mtmChangeProductAmountInOrder(mtm, id, 6, 10.25);
+    mtmChangeProductAmountInOrder(mtm, id, 10, 2);
+    mtmChangeProductAmountInOrder(mtm, id, 7, 1.5);
+    return id;
+}
+
+bool testPrintOrder() {
+    Matamikya mtm = matamikyaCreate();
+    unsigned int orderId = makeOrder(mtm);
+    FILE *outputFile = fopen(ORDER_OUT_FILE, "w");
+    assert(outputFile);
+    ASSERT_OR_DESTROY(mtmPrintOrder(mtm, orderId, outputFile) == MATAMIKYA_SUCCESS);
+    fclose(outputFile);
+    FILE *expected = fopen(ORDER_TEST_FILE, "r");
+    FILE *printed = fopen(ORDER_OUT_FILE, "r");
+    assert(expected);
+    assert(printed);
+
+    /* test that prefix and printed orderId is correct */
+    const char *expectedPrefix = "Order ";
+    int size = strlen(expectedPrefix);
+    for (int i = 0; i < size; ++i) {
+        ASSERT_OR_DESTROY(fgetc(printed) == expectedPrefix[i]);
+    }
+    unsigned int printedId;
+    fscanf(printed, "%u", &printedId);
+    ASSERT_OR_DESTROY(orderId == printedId);
+
+    /* skip the rest of the header line */
+    while (fgetc(printed) != '\n');
+    while (fgetc(expected) != '\n');
+
+    ASSERT_OR_DESTROY(fileEqual(expected, printed));
+    fclose(expected);
+    fclose(printed);
+    matamikyaDestroy(mtm);
+    return true;
+}
+
+bool testPrintBestSelling() {
+    Matamikya mtm = matamikyaCreate();
+    makeInventory(mtm);
+
+    FILE *outputFile = fopen(NO_SELLING_OUT_FILE, "w");
+    assert(outputFile);
+    ASSERT_OR_DESTROY(mtmPrintBestSelling(mtm, outputFile) == MATAMIKYA_SUCCESS);
+    fclose(outputFile);
+    ASSERT_OR_DESTROY(wholeFileEqual(NO_SELLING_TEST_FILE, NO_SELLING_OUT_FILE));
+
+    unsigned int order = mtmCreateNewOrder(mtm);
+    mtmChangeProductAmountInOrder(mtm, order, 10, 3.0);
+    mtmShipOrder(mtm, order);
+
+    order = mtmCreateNewOrder(mtm);
+    mtmChangeProductAmountInOrder(mtm, order, 6, 10.25);
+    mtmChangeProductAmountInOrder(mtm, order, 7, 1.5);
+    mtmChangeProductAmountInOrder(mtm, order, 11, 1.0);
+    mtmShipOrder(mtm, order);
+
+    outputFile = fopen(BEST_SELLING_OUT_FILE, "w");
+    assert(outputFile);
+    ASSERT_OR_DESTROY(mtmPrintBestSelling(mtm, outputFile) == MATAMIKYA_SUCCESS);
+    fclose(outputFile);
+    ASSERT_OR_DESTROY(wholeFileEqual(BEST_SELLING_TEST_FILE, BEST_SELLING_OUT_FILE));
+
+    matamikyaDestroy(mtm);
+    return true;
+}

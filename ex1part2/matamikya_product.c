@@ -25,7 +25,7 @@ Product ProductCreate(unsigned int id, char* name,
   new_product->amount_type = amount_type;
   new_product->income = 0;
 
-  new_product->name = malloc(sizeof(char)*strlen(name));
+  new_product->name = malloc((sizeof(char)*strlen(name))+1);
   if(new_product->name == NULL)
   {
       free(new_product);

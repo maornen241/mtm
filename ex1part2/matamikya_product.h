@@ -11,7 +11,7 @@
 struct product_t
 {
     unsigned int product_id;
-    unsigned int income;//change to double (not unsigned)
+    double income;
     char* name;
     MatamikyaAmountType amount_type;
     MtmProductData custom_data;

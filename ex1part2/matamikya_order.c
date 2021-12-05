@@ -60,13 +60,21 @@ Order OrderCreate()
 
 void OrderDestroy(SetElement element)
 {
-    Order order = (Order) element; //casting element into order
-    if(order == NULL)
-    {
-        return;
+    // Order order = (Order) element; //casting element into order
+    // if(order == NULL)
+    // {
+    //     return;
+    // }
+
+    // asDestroy(order->items);
+    // free(order);
+    if(element == NULL)
+     {
+         return;
     }
 
-    asDestroy(order->items);
+    asDestroy(((Order)element)->items);
+    free(element);
 }
 
 SetElement OrderCopy(SetElement element)
@@ -81,6 +89,7 @@ SetElement OrderCopy(SetElement element)
 
     new_order->order_id = order->order_id;
 
+    asDestroy(new_order->items);
     new_order->items = asCopy(order->items);
     if(new_order->items == NULL)
     {
