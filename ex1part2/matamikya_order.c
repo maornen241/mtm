@@ -23,20 +23,8 @@ void ItemIdFree(ASElement element)
 
 int ItemIdCompare(ASElement element1, ASElement element2)
 {
-    /**
-    int* id1 = malloc(sizeof(*id1));
-    int* id2 = malloc(sizeof(*id2));
-    assert(id1 != NULL && id2 != NULL);
-
-    *id1 = *(int*) element1;
-    *id2 = *(int*) element2;
-
-    return (*id1)-(*id2);
-    **/
     return (*(int*)(element1)) - (*(int*)(element2));
 }
-
-
 
 
 
@@ -60,14 +48,6 @@ Order OrderCreate()
 
 void OrderDestroy(SetElement element)
 {
-    // Order order = (Order) element; //casting element into order
-    // if(order == NULL)
-    // {
-    //     return;
-    // }
-
-    // asDestroy(order->items);
-    // free(order);
     if(element == NULL)
      {
          return;

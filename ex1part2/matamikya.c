@@ -12,17 +12,84 @@
 #include <string.h>
 #include <math.h>
 
+/**
+ * isAmountCompatible: checks if a given amount is valid according to the amount type that was given.
+ *
+ * @param amount - amount to check if has type of amount type.
+ * @param amountType - can be: INT_AMOUNT, HALF_INT_AMOUNT, ANY_AMOUNT
+ * @return
+ * true - if the amount is compatible with amountType
+ * false - otherwise
+ */
+static bool isAmountCompatible(const double amount, const MatamikyaAmountType amountType);
 
-static bool is_amount_compatible(const double amount, const MatamikyaAmountType amountType);
-static bool is_int_amount_valid(double amount);
-static bool is_half_int_amount_valid(double amount);
-static Product getProduct_from_id(AmountSet inventory, unsigned int id);
-static Order get_order_from_id(Set orders, unsigned int id);
+/**
+ * isIntAmountValid: checks if a given amount is of type INT_AMOUNT.
+ *
+ * @param amount - amount to check if has type INT_AMOUNT.
+ * @return
+ * true - if the amount is within 0.001 of an integer
+ * false - otherwise
+ */
+static bool isIntAmountValid(double amount);
 
-//according to a given order decreases amount of relevant products in warehouse
-//and increases their income accordingly
+/**
+ * isHalfIntAmountValid: checks if a given amount is of type HALF_INT_AMOUNT.
+ *
+ * @param amount - amount to check if has type HALF_INT_AMOUNT.
+ * @return
+ * true - if the amount is within 0.001 of a half-integer
+ * false - otherwise
+ */
+static bool isHalfIntAmountValid(double amount);
+
+/**
+ * getProductFromId: finds a product in inventory by it's id.
+ *
+ * returns pointer (not a copy) to a product with a given id from a given inventory.
+ *
+ * @param inventory - inventory to look for the product in.
+ * @param id - id of product to be found.
+ * @return
+ *     NULL - if a NULL argument is passed, or if inventory has no such product.
+ *     pointer to product - a pointer (not a copy) to the found product.
+ */
+static Product getProductFromId(AmountSet inventory, unsigned int id);
+
+/**
+ * getOrderFromId: finds an order in orders by it's id.
+ *
+ * returns pointer (not a copy) to an order with a given id from a given set of orders.
+ *
+ * @param orders - set of orders to look for the order in.
+ * @param id - id of order to find.
+ * @return
+ *     NULL - if a NULL argument is passed, or if set has no such order.
+ *     pointer to order - a pointer (not a copy) to the found order.
+ */
+static Order getOrderFromId(Set orders, unsigned int id);
+
+
 //if the order contains some product with amount larger then the amount existing in the warehouse, returns MATAMIKYA_INSUFFICENT_AMOUNT
-static MatamikyaResult modifying_inventory_according_to_order(Matamikya matamikya, Order order_to_ship);
+
+
+/**
+ * modifyingInventoryAccordingToOrder: 
+ *according to a given order decreases amount of relevant products in warehouse
+ *and increases their income accordingly
+ * 
+ * 
+ * @param matamikya - warehouse containing the order and the product.
+ * @param order_to_ship - according to this order we modify the warehouse.
+
+ * @return
+ *     MATAMIKYA_NULL_ARGUMENT - if a NULL argument is passed.
+ *     MATAMIKYA_PRODUCT_NOT_EXIST - if matamikya does not contain a product with
+ *         the given productId.
+ *     MATAMIKYA_INSUFFICIENT_AMOUNT - if a given product in the order has a bigger amount then in the inventory.
+ *     MATAMIKYA_SUCCESS - if the warehose was modified successfully.
+ */
+static MatamikyaResult modifyingInventoryAccordingToOrder(Matamikya matamikya, Order order_to_ship);
 
 #define ALLOWED_ERROR 0.001
 #define HALF_ERROR 0.5
@@ -105,7 +172,7 @@ MatamikyaResult mtmNewProduct(Matamikya matamikya, const unsigned int id, const 
         return MATAMIKYA_INVALID_NAME;
     }
 
-    if(amount < 0 || !is_amount_compatible(amount, amountType))
+    if(amount < 0 || !isAmountCompatible(amount, amountType))
     {
         return MATAMIKYA_INVALID_AMOUNT;
     }
@@ -135,11 +202,10 @@ MatamikyaResult mtmNewProduct(Matamikya matamikya, const unsigned int id, const 
     }
     
     AmountSetResult register_result =  asRegister(matamikya->inventory, new_product);
-    Product product_in_set = getProduct_from_id(matamikya->inventory, id);
+    Product product_in_set = getProductFromId(matamikya->inventory, id);
     assert(product_in_set != NULL);
 
     asChangeAmount(matamikya->inventory, product_in_set, amount);
-    //asChangeAmount(matamikya->inventory, new_product, amount);
     ProductFree(new_product);// asRegister copies the new_product, so we need to delete the origin
 
     if(register_result == AS_ITEM_ALREADY_EXISTS)
@@ -165,13 +231,16 @@ MatamikyaResult mtmChangeProductAmount(Matamikya matamikya, const unsigned int i
         return MATAMIKYA_NULL_ARGUMENT;
     }
 
-    Product product_to_change = getProduct_from_id(matamikya->inventory, id);
+    Product product_to_change = getProductFromId(matamikya->inventory, id);
     if(product_to_change == NULL)
     {
         return MATAMIKYA_PRODUCT_NOT_EXIST;
     }
+    double product_amount;
+    asGetAmount(matamikya->inventory, product_to_change, &product_amount);
 
-    if(!is_amount_compatible(amount, product_to_change->amount_type))
+    if(!isAmountCompatible(amount, product_to_change->amount_type)
+         || !isAmountCompatible(amount+product_amount, product_to_change->amount_type))
     {
         return MATAMIKYA_INVALID_AMOUNT;
     }
@@ -195,7 +264,7 @@ MatamikyaResult mtmClearProduct(Matamikya matamikya, const unsigned int id)
         return MATAMIKYA_NULL_ARGUMENT;
     }
 
-    Product product_to_clear = getProduct_from_id(matamikya->inventory, id);
+    Product product_to_clear = getProductFromId(matamikya->inventory, id);
     if(product_to_clear == NULL)
     {
         return MATAMIKYA_PRODUCT_NOT_EXIST;
@@ -271,7 +340,7 @@ MatamikyaResult mtmChangeProductAmountInOrder(Matamikya matamikya, const unsigne
     }
 
    
-    Order order_to_change = get_order_from_id(matamikya->orders,  orderId);
+    Order order_to_change = getOrderFromId(matamikya->orders,  orderId);
 
     //no such order
     if(order_to_change == NULL)
@@ -279,7 +348,7 @@ MatamikyaResult mtmChangeProductAmountInOrder(Matamikya matamikya, const unsigne
         return MATAMIKYA_ORDER_NOT_EXIST; 
     }
 
-    Product product_in_inventory = getProduct_from_id(matamikya->inventory, productId);
+    Product product_in_inventory = getProductFromId(matamikya->inventory, productId);
 
     //no such product in warehouse
     if(product_in_inventory == NULL)
@@ -287,7 +356,7 @@ MatamikyaResult mtmChangeProductAmountInOrder(Matamikya matamikya, const unsigne
         return MATAMIKYA_PRODUCT_NOT_EXIST;
     }
 
-    if(!is_amount_compatible(amount, product_in_inventory->amount_type))
+    if(!isAmountCompatible(amount, product_in_inventory->amount_type))
     {
         return MATAMIKYA_INVALID_AMOUNT;
     }
@@ -318,7 +387,7 @@ MatamikyaResult mtmChangeProductAmountInOrder(Matamikya matamikya, const unsigne
     }
     
         /*
-        if we got here item exits in order
+        if we got here item exists in order
         */
 
         if(current_item_amount + amount <= 0)
@@ -348,7 +417,7 @@ MatamikyaResult mtmShipOrder(Matamikya matamikya, const unsigned int orderId)
         return MATAMIKYA_NULL_ARGUMENT;
     }
 
-    Order order_to_ship = get_order_from_id(matamikya->orders,  orderId);
+    Order order_to_ship = getOrderFromId(matamikya->orders,  orderId);
     //no such order
     if(order_to_ship == NULL)
     {
@@ -356,7 +425,7 @@ MatamikyaResult mtmShipOrder(Matamikya matamikya, const unsigned int orderId)
     }
 
     //changing amount of all products containd in order and increase profit
-    MatamikyaResult ship_result = modifying_inventory_according_to_order(matamikya, order_to_ship);
+    MatamikyaResult ship_result = modifyingInventoryAccordingToOrder(matamikya, order_to_ship);
     if(ship_result != MATAMIKYA_SUCCESS)
     {
         return ship_result;
@@ -380,7 +449,7 @@ MatamikyaResult mtmCancelOrder(Matamikya matamikya, const unsigned int orderId)
         return MATAMIKYA_ORDER_NOT_EXIST;
     }
 
-    Order order_to_cancel =  get_order_from_id(matamikya->orders, orderId);
+    Order order_to_cancel =  getOrderFromId(matamikya->orders, orderId);
     if(order_to_cancel == NULL)
     {
         return MATAMIKYA_ORDER_NOT_EXIST;
@@ -417,21 +486,7 @@ MatamikyaResult mtmPrintInventory(Matamikya matamikya, FILE *output)
 }
 
 
-/**
- * matamikyaPrintOrder: print a summary of an order from a Matamikya warehouse,
- * as explained in the *.pdf
- *
- * The printout includes the total price of the order.
- *
- * @param matamikya - the Matamikya warehouse containing the order.
- * @param orderId - id of the order in matamikya.
- * @param output - an open, writable output stream, to which the order is printed.
- * @return
- *     MATAMIKYA_NULL_ARGUMENT - if a NULL argument is passed.
- *     MATAMIKYA_ORDER_NOT_EXIST - if matamikya does not contain an order with
- *         the given orderId.
- *     MATAMIKYA_SUCCESS - if printed successfully.
- */
+
 MatamikyaResult mtmPrintOrder(Matamikya matamikya, const unsigned int orderId, FILE *output)
 {
     if(matamikya == NULL || matamikya->orders == NULL || output == NULL)
@@ -439,7 +494,7 @@ MatamikyaResult mtmPrintOrder(Matamikya matamikya, const unsigned int orderId, F
         return MATAMIKYA_NULL_ARGUMENT;       
     }
 
-    Order order_to_print = get_order_from_id(matamikya->orders, orderId);
+    Order order_to_print = getOrderFromId(matamikya->orders, orderId);
     if(order_to_print == NULL)
     {
         return MATAMIKYA_ORDER_NOT_EXIST;
@@ -453,7 +508,7 @@ MatamikyaResult mtmPrintOrder(Matamikya matamikya, const unsigned int orderId, F
         double item_amount = 0;
         asGetAmount( order_to_print->items, current_item_id, &item_amount);
 
-        Product current_product = getProduct_from_id(matamikya->inventory, *current_item_id);
+        Product current_product = getProductFromId(matamikya->inventory, *current_item_id);
         assert(current_product != NULL);
 
         double product_price = (current_product->get_product_price)(current_product->custom_data, item_amount);
@@ -468,16 +523,7 @@ MatamikyaResult mtmPrintOrder(Matamikya matamikya, const unsigned int orderId, F
 }
 
 
-/**
- * mtmPrintBestSelling: print the best selling products of a Matamikya
- * warehouse, as explained in the *.pdf.
- *
- * @param matamikya - a Matamikya warehouse.
- * @param output - an open, writable output stream, to which the order is printed.
- * @return
- *     MATAMIKYA_NULL_ARGUMENT - if a NULL argument is passed.
- *     MATAMIKYA_SUCCESS - if printed successfully.
- */
+
 MatamikyaResult mtmPrintBestSelling(Matamikya matamikya, FILE *output)
 {
     if(matamikya == NULL || matamikya->inventory == NULL || output == NULL)
@@ -519,92 +565,23 @@ MatamikyaResult mtmPrintBestSelling(Matamikya matamikya, FILE *output)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-static bool is_amount_compatible(const double amount, const MatamikyaAmountType amountType)
+static bool isAmountCompatible(const double amount, const MatamikyaAmountType amountType)
 {
     if(amountType == MATAMIKYA_INTEGER_AMOUNT)
     {
-        return is_int_amount_valid(amount);
+        return isIntAmountValid(amount);
     }
 
     if(amountType == MATAMIKYA_HALF_INTEGER_AMOUNT)
     {
-        return is_half_int_amount_valid(amount);
+        return isHalfIntAmountValid(amount);
     }
 
     return true;
 }
 
 
-static bool is_int_amount_valid(double amount)
+static bool isIntAmountValid(double amount)
 {
     int rounded_amount = round(amount);
     double diff = rounded_amount - amount;
@@ -614,18 +591,16 @@ static bool is_int_amount_valid(double amount)
 }
     
 
-static bool is_half_int_amount_valid(double amount)
+static bool isHalfIntAmountValid(double amount)
 {
-    return (is_int_amount_valid(amount) || is_int_amount_valid(amount+0.5));
+    return (isIntAmountValid(amount) || isIntAmountValid(amount+0.5));
 
     
 }
 
 
-//returns pointer (not a copy) to a product with a given id from a given inventory
-//if inventory has no such product, returns NULL
-//if NULL was given in the parameter inventory or inventory is NULL returns NULL
-static Product getProduct_from_id(AmountSet inventory, unsigned int id)
+
+static Product getProductFromId(AmountSet inventory, unsigned int id)
 {
     if(inventory == NULL)
     {
@@ -645,10 +620,7 @@ static Product getProduct_from_id(AmountSet inventory, unsigned int id)
 }
 
 
-//returns pointer (not a copy) to order with a given id from a given orders set
-//if orders has no such order, returns NULL
-//if NULL was given in the parameter orders  returns NULL
-static Order get_order_from_id(Set orders, unsigned int id)
+static Order getOrderFromId(Set orders, unsigned int id)
 {
     if(orders == NULL)
     {
@@ -669,7 +641,7 @@ static Order get_order_from_id(Set orders, unsigned int id)
 
 
 
-static MatamikyaResult modifying_inventory_according_to_order(Matamikya matamikya, Order order_to_ship )
+static MatamikyaResult modifyingInventoryAccordingToOrder(Matamikya matamikya, Order order_to_ship )
 {
     if(matamikya == NULL || order_to_ship == NULL)
     {
@@ -681,7 +653,7 @@ static MatamikyaResult modifying_inventory_according_to_order(Matamikya matamiky
         /*
         changing product's amount in inventory
         */
-        Product current_product  = getProduct_from_id(matamikya->inventory,  *ptr_current_item_id);
+        Product current_product  = getProductFromId(matamikya->inventory,  *ptr_current_item_id);
         if(current_product == NULL)
         {
             return MATAMIKYA_PRODUCT_NOT_EXIST;

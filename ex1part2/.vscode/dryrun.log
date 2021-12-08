@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/home/maorben/mtm/ex1part2'
+gcc -c -std=c99 -Wall -pedantic-errors -Werror -DNDEBUG  amount_set_str_linkedList.c
+gcc -c -std=c99 -Wall -pedantic-errors -Werror -DNDEBUG  tests/amount_set_str_main.c
+gcc -c -std=c99 -Wall -pedantic-errors -Werror -DNDEBUG  amount_set_str_tests.c
+cc    -c -o amount_set_str.o amount_set_str.c
+gcc amount_set_str_linkedList.o amount_set_str_main.o amount_set_str_tests.o amount_set_str.o -o amount_set_str
+make: Leaving directory `/home/maorben/mtm/ex1part2'
+ 
