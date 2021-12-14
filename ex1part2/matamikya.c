@@ -202,16 +202,17 @@ MatamikyaResult mtmNewProduct(Matamikya matamikya, const unsigned int id, const 
     }
     
     AmountSetResult register_result =  asRegister(matamikya->inventory, new_product);
+    if(register_result == AS_ITEM_ALREADY_EXISTS)
+    {
+        ProductFree(new_product);
+        return MATAMIKYA_PRODUCT_ALREADY_EXIST;
+    }
+
     Product product_in_set = getProductFromId(matamikya->inventory, id);
     assert(product_in_set != NULL);
 
     asChangeAmount(matamikya->inventory, product_in_set, amount);
     ProductFree(new_product);// asRegister copies the new_product, so we need to delete the origin
-
-    if(register_result == AS_ITEM_ALREADY_EXISTS)
-    {
-         return MATAMIKYA_PRODUCT_ALREADY_EXIST;
-    }
 
     if(register_result ==  AS_SUCCESS)
     {
@@ -555,6 +556,7 @@ MatamikyaResult mtmPrintBestSelling(Matamikya matamikya, FILE *output)
         if(current_product->income == max_profit)
         {
             mtmPrintIncomeLine(current_product->name, current_product->product_id, max_profit, output);
+            break;
         }
     }
     return MATAMIKYA_SUCCESS;
@@ -648,6 +650,30 @@ static MatamikyaResult modifyingInventoryAccordingToOrder(Matamikya matamikya, O
         return MATAMIKYA_NULL_ARGUMENT;
     }
     
+    //checking products amount in order aren't bigger then in inventory
+    AS_FOREACH(int*, ptr_current_item_id, order_to_ship->items)
+    {
+
+        Product current_product  = getProductFromId(matamikya->inventory,  *ptr_current_item_id);
+        if(current_product == NULL)
+        {
+            return MATAMIKYA_PRODUCT_NOT_EXIST;
+        }
+
+        double  product_amount_in_order = 0;
+        asGetAmount(order_to_ship->items , ptr_current_item_id, &product_amount_in_order);
+
+        double product_amount_inventory;
+        asGetAmount(matamikya->inventory, current_product, &product_amount_inventory);
+
+        if(product_amount_inventory - product_amount_in_order < 0)
+        {
+            return MATAMIKYA_INSUFFICIENT_AMOUNT;
+        }
+
+    }
+
+
     AS_FOREACH(int*, ptr_current_item_id, order_to_ship->items)
     {
         /*
@@ -662,11 +688,8 @@ static MatamikyaResult modifyingInventoryAccordingToOrder(Matamikya matamikya, O
         double  product_amount_in_order = 0;
         asGetAmount(order_to_ship->items , ptr_current_item_id, &product_amount_in_order);
 
-        if(asChangeAmount(matamikya->inventory, current_product, product_amount_in_order) == AS_INSUFFICIENT_AMOUNT)
-        {
-            return MATAMIKYA_INSUFFICIENT_AMOUNT;
-        }
-
+        asChangeAmount(matamikya->inventory, current_product, -product_amount_in_order);
+        
         /*
         changing product's income
         */

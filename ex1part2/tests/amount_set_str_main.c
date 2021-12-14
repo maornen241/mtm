@@ -19,7 +19,7 @@ int main()
     RUN_TEST_CASE(getSizeOfEmptyAs);
     RUN_TEST_CASE(getSizeOfFullAs);
     RUN_TEST_CASE(getSizeOfAsAndCheckIteratorUnchanged);
-     printf("\n");
+    printf("\n");
 
     RUN_TEST_CASE(containesNullSet);
     RUN_TEST_CASE(containesNullElement);
@@ -70,6 +70,7 @@ int main()
 
     RUN_TEST_CASE(getNextNullSet);
     RUN_TEST_CASE(getNextEmptyList);
+    RUN_TEST_CASE(getNextUndefinedIterator);
     RUN_TEST_CASE(getNextMiddleOfList);
     printf("\n");
 

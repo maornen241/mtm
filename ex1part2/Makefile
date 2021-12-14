@@ -38,7 +38,7 @@ matamikya_product.o: matamikya_product.c matamikya_product.h matamikya.h amount_
 	gcc -c $(COMP_FLAG) matamikya_product.c	
 
 matamikya_tests.o: matamikya_tests.c matamikya_tests.h matamikya.h test_utilities.h
-	gcc -c $(COMP_FLAG) matamikya_tests.c	
+	gcc -c $(COMP_FLAG) eanmatamikya_tests.c	
 
 
 

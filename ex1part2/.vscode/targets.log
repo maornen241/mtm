@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Dec  9 00:50:14 2021
+# Make data base, printed on Fri Dec 10 23:28:50 2021
 
 # Variables
 
@@ -51,9 +51,9 @@ LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 VSCODE_CWD = /home/maorben
 # environment
-SSH_CONNECTION = 132.69.237.242 55290 132.68.32.76 22
+SSH_CONNECTION = 132.69.236.255 56305 132.68.32.76 22
 # environment
-PATH = /home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/bin:/usr/bin/:/home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/bin:/usr/lib64/qt-3.3/bin:/usr/bin/:/usr/local/bin:/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/sbin:/usr/local/pgsql/bin:/home/maorben/bin
+PATH = /home/maorben/.vscode-server/bin/7db1a2b88f7557e0a43fec75b6ba7e50b3e9f77e/bin:/usr/bin/:/home/maorben/.vscode-server/bin/7db1a2b88f7557e0a43fec75b6ba7e50b3e9f77e/bin:/usr/lib64/qt-3.3/bin:/usr/bin/:/usr/local/bin:/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/sbin:/usr/local/pgsql/bin:/home/maorben/bin
 # environment
 QT_GRAPHICSSYSTEM_CHECKED = 1
 # environment
@@ -71,7 +71,7 @@ VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /home/maorben/mtm/ex1part2
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-2ac2d16b-6e18-48d0-84fa-22cbda642be8.sock
+VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-dd6915ac-e156-4244-b55d-f5fad9108dc6.sock
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -101,7 +101,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 5
 # environment
-XDG_SESSION_ID = 39512
+XDG_SESSION_ID = 47721
 # environment
 USER = maorben
 # environment
@@ -119,13 +119,13 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # environment
-SSH_CLIENT = 132.69.237.242 55290 22
+SSH_CLIENT = 132.69.236.255 56305 22
 # environment
 MAIL = /var/spool/mail/maorben
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-BROWSER = /home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/bin/helpers/browser.sh
+BROWSER = /home/maorben/.vscode-server/bin/7db1a2b88f7557e0a43fec75b6ba7e50b3e9f77e/bin/helpers/browser.sh
 # default
 MAKEFILES := 
 # automatic
@@ -141,7 +141,7 @@ HISTSIZE = 1000
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
-VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/maorben/.vscode-server/bin/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/remote/node_modules
+VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/maorben/.vscode-server/bin/7db1a2b88f7557e0a43fec75b6ba7e50b3e9f77e/remote/node_modules
 # environment
 QTINC = /usr/lib64/qt-3.3/include
 # default
@@ -161,9 +161,9 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 
 # Directories
 
-# . (device 46, inode 94969567): 32 files, no impossibilities.
+# . (device 46, inode 94969567): 36 files, no impossibilities.
 
-# 32 files, no impossibilities in 1 directories.
+# 36 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -284,8 +284,6 @@ matamikya.o: matamikya.c matamikya_print.h matamikya.h amount_set.h set.h matami
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
-make: *** No rule to make target `all'.  Stop.
  
 #  recipe to execute (from `Makefile', line 26):
 	gcc -c $(COMP_FLAG) matamikya.c
@@ -449,13 +447,15 @@ amount_set_str_main.o: tests/amount_set_str_main.c amount_set_str_tests.h amount
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 0 / lookups = 118 / hits = 118
+# # of strings in strcache: 0 / lookups = 122 / hits = 122
 # # of strcache buffers: 1 (* 8176 B/buffer = 8176 B)
 # strcache used: total = 0 (813) / max = 0 / min = 8176 / avg = 0
 # strcache free: total = 0 (7363) / max = 0 / min = 8176 / avg = 0
 
 # strcache hash-table stats:
-# Load=52/8192=1%, Rehash=0, Collisions=3/118=3%
-# Finished Make data base on Thu Dec  9 00:50:14 2021
+# Load=52/8192=1%, Rehash=0, Collisions=3/122=2%
+# Finished Make data base on Fri Dec 10 23:28:50 2021
 
+ 
+make: *** No rule to make target `all'.  Stop.
  

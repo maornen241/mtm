@@ -6,6 +6,8 @@
 #include "amount_set_str.h"
 #include "amount_set_str_linkedList.h"
 
+#define UNDEFINED_STATE NULL
+
 
 struct AmountSet_t{
     asNode head; 
@@ -51,15 +53,9 @@ AmountSet asCopy(AmountSet set)
     }
 
     new_as->head = copyLinkedList(set->head);
+    new_as->iterator = UNDEFINED_STATE;
+    set->iterator = UNDEFINED_STATE;
 
-    //im pretty sure this is unnecessary
-    //I think we should just return As with NULL as head
-    /**
-    if(newAs->head == NULL)
-    {
-        return NULL;
-    }
-    **/
     
     return new_as;
 }
@@ -98,11 +94,11 @@ bool asContains(AmountSet set, const char* element)
         return false;
     }
 
-    asNode iterator = set->head;
+    asNode internal_iterator = set->head;
 
-    while (iterator != NULL)
+    while (internal_iterator != NULL)
     {
-        char* current_name = iterator->name;
+        char* current_name = internal_iterator->name;
         assert(current_name != NULL);
 
         if(strcmp(current_name,element) == 0)
@@ -110,7 +106,7 @@ bool asContains(AmountSet set, const char* element)
             return true;
         }
 
-        iterator = iterator->next;
+        internal_iterator = internal_iterator->next;
     }
 
     return false;
@@ -128,13 +124,13 @@ AmountSetResult asGetAmount(AmountSet set, const char* element, double* outAmoun
         return AS_ITEM_DOES_NOT_EXIST;
     }
 
-    asNode iterator = set->head;
-    while(strcmp(iterator->name, element) != 0)
+    asNode internal_iterator = set->head;
+    while(strcmp(internal_iterator->name, element) != 0)
     {
-        iterator = iterator->next;
+        internal_iterator = internal_iterator->next;
     }
 
-    *outAmount = iterator->amount;
+    *outAmount = internal_iterator->amount;
 
     
     return  AS_SUCCESS;
@@ -147,6 +143,7 @@ AmountSetResult asRegister(AmountSet set, const char* element)
     {
         return AS_NULL_ARGUMENT;
     }
+    set->iterator = UNDEFINED_STATE;
 
     if(asContains(set,element) == true)
     {
@@ -238,7 +235,8 @@ AmountSetResult asDelete(AmountSet set, const char* element)
     {
         return AS_NULL_ARGUMENT;
     }
-
+    set->iterator = UNDEFINED_STATE;
+    
     if(asContains(set, element) == false)
     {
         return AS_ITEM_DOES_NOT_EXIST;
@@ -279,10 +277,10 @@ AmountSetResult asClear(AmountSet set)
     {
         return AS_NULL_ARGUMENT;
     }
+    set->iterator = UNDEFINED_STATE;
 
     destroyList(set->head);
     set->head = NULL;
-    set->iterator = NULL;
     return AS_SUCCESS; 
 }
 
@@ -300,14 +298,11 @@ char* asGetFirst(AmountSet set)
 
 char* asGetNext(AmountSet set)
 {
-    if(set == NULL || set->head == NULL|| set->iterator == NULL || set->iterator->next == NULL)
+    if(set == NULL || set->head == NULL
+        || set->iterator == UNDEFINED_STATE || set->iterator->next == NULL)
     {
         return NULL;
     }
-
-    //*******************************************************************
-    //how do we check if iterator is invalid?? what does it meen at all??
-    //*******************************************************************
 
     set->iterator = set->iterator->next;
     return set->iterator->name; 

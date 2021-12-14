@@ -86,9 +86,10 @@ bool getFirstFullListAndCheckOriginalName();
 
 bool getNextNullSet();
 bool getNextEmptyList();
+bool getNextUndefinedIterator();
 bool getNextMiddleOfList();
-bool foreachFullSet();
 
+bool foreachFullSet();
 bool forEachNullSet();
 bool forEachEmptyList();
 

@@ -892,6 +892,68 @@ bool getNextMiddleOfList()
 
 }
 
+bool getNextNullSet()
+{
+    char* result = asGetNext(NULL);
+    if(result == NULL)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool getNextEmptyList()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+    
+    bool result = (NULL == asGetNext(set));
+    asDestroy(set);
+    return result;
+}
+
+bool getNextUndefinedIterator()
+{
+    AmountSet set = asCreate();
+    assert(set != NULL);
+
+    asRegister(set, "Ma?");
+    asRegister(set, "yonez!");
+    asRegister(set, "turning");
+    asRegister(set, "tables");
+
+    asChangeAmount(set, "Ma?", 2.3);
+    asChangeAmount(set, "yonez!", 1);
+    asChangeAmount(set, "turning", 0);
+    asChangeAmount(set, "tables", 16);
+
+    asGetFirst(set);
+    asGetNext(set);
+    asRegister(set, "zebra");
+    char* should_be_null1 = asGetNext(set);
+
+    asGetFirst(set);
+    asGetNext(set);
+    asDelete(set, "zebra");
+    char* should_be_null2 = asGetNext(set);
+
+    asGetFirst(set);
+    asGetNext(set);
+    AmountSet copied_set = asCopy(set);
+    char* should_be_null3 = asGetNext(set);
+
+    asGetFirst(set);
+    asGetNext(set);
+    asClear(set);
+    char* should_be_null4 = asGetNext(set);
+
+    bool result = (!should_be_null1 && !should_be_null2 && !should_be_null3 && !should_be_null4);
+    asDestroy(copied_set);
+    asDestroy(set);
+    return result;
+
+}
+
 
 bool forEachNullSet()
 {
@@ -954,22 +1016,3 @@ bool foreachFullSet()
     return true;
 }
 
-bool getNextNullSet()
-{
-    char* result = asGetNext(NULL);
-    if(result == NULL)
-    {
-        return true;
-    }
-    return false;
-}
-
-bool getNextEmptyList()
-{
-    AmountSet set = asCreate();
-    assert(set != NULL);
-    
-    bool result = (NULL == asGetNext(set));
-    asDestroy(set);
-    return result;
-}
