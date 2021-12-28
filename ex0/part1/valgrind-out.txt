@@ -1,0 +1,71 @@
+==20312== Memcheck, a memory error detector
+==20312== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==20312== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==20312== Command: ./mtm_tot
+==20312== Parent PID: 19499
+==20312== 
+--20312-- 
+--20312-- Valgrind options:
+--20312--    --leak-check=full
+--20312--    --show-leak-kinds=all
+--20312--    --track-origins=yes
+--20312--    --verbose
+--20312--    --log-file=valgrind-out.txt
+--20312--    --track-origins=yes
+--20312-- Contents of /proc/version:
+--20312--   Linux version 3.10.0-1160.49.1.el7.x86_64 (mockbuild@x86-vm-43.build.eng.bos.redhat.com) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ) #1 SMP Tue Nov 9 16:09:48 UTC 2021
+--20312-- 
+--20312-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3-avx
+--20312-- Page sizes: currently 4096, max supported 4096
+--20312-- Valgrind library directory: /usr/libexec/valgrind
+--20312-- Reading syms from /home/maorben/mtm/ex0/part1/mtm_tot
+--20312-- Reading syms from /usr/lib64/ld-2.17.so
+--20312-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--20312--    object doesn't have a symbol table
+--20312--    object doesn't have a dynamic symbol table
+--20312-- Scheduler: using generic scheduler lock implementation.
+--20312-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==20312== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-20312-by-maorben-on-csl3
+==20312== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-20312-by-maorben-on-csl3
+==20312== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-20312-by-maorben-on-csl3
+==20312== 
+==20312== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==20312== don't want to do, unless you know exactly what you're doing,
+==20312== or are doing some strange experiment):
+==20312==   /usr/libexec/valgrind/../../bin/vgdb --pid=20312 ...command...
+==20312== 
+==20312== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==20312==   /path/to/gdb ./mtm_tot
+==20312== and then give GDB the following command
+==20312==   target remote | /usr/libexec/valgrind/../../bin/vgdb --pid=20312
+==20312== --pid is optional if only one valgrind process is running
+==20312== 
+--20312-- REDIR: 0x4019e40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c7ed5 (???)
+--20312-- REDIR: 0x4019c10 (ld-linux-x86-64.so.2:index) redirected to 0x580c7eef (???)
+--20312-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--20312-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==20312== WARNING: new redirection conflicts with existing -- ignoring it
+--20312--     old: 0x04019e40 (strlen              ) R-> (0000.0) 0x580c7ed5 ???
+--20312--     new: 0x04019e40 (strlen              ) R-> (2007.0) 0x04c2d1b0 strlen
+--20312-- REDIR: 0x4019dc0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c2e300 (strcmp)
+--20312-- REDIR: 0x401aa80 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c31f90 (mempcpy)
+--20312-- Reading syms from /usr/lib64/libc-2.17.so
+--20312-- REDIR: 0x4ec71d0 (libc.so.6:strcasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--20312-- REDIR: 0x4ec3f40 (libc.so.6:strnlen) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--20312-- REDIR: 0x4ec94d0 (libc.so.6:strncasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--20312-- REDIR: 0x4ec69a0 (libc.so.6:memset) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--20312-- REDIR: 0x4ec6950 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--20312-- REDIR: 0x4ec5930 (libc.so.6:__GI_strrchr) redirected to 0x4c2cb70 (__GI_strrchr)
+--20312-- REDIR: 0x4ec3e60 (libc.so.6:__GI_strlen) redirected to 0x4c2d110 (__GI_strlen)
+--20312-- REDIR: 0x4ec6b70 (libc.so.6:__GI_mempcpy) redirected to 0x4c31cc0 (__GI_mempcpy)
+--20312-- REDIR: 0x4ebc740 (libc.so.6:malloc) redirected to 0x4c29eec (malloc)
+--20312-- REDIR: 0x4ecd4b0 (libc.so.6:strchrnul) redirected to 0x4c31ab0 (strchrnul)
+--20312-- REDIR: 0x4ebcb60 (libc.so.6:free) redirected to 0x4c2afe6 (free)
+==20312== 
+==20312== HEAP SUMMARY:
+==20312==     in use at exit: 0 bytes in 0 blocks
+==20312==   total heap usage: 2 allocs, 2 frees, 24 bytes allocated
+==20312== 
+==20312== All heap blocks were freed -- no leaks are possible
+==20312== 
+==20312== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "skill.hpp"
+#include "skill.h"
 
 using std::cout;
 using std::cin;
@@ -72,20 +72,122 @@ namespace mtm
 
     Skill& Skill::operator+=(const int points_to_add)
     {
-        //we need to add an exception if point_to_add < 0
+        if(points_to_add < 0)
+        {
+            throw NegativePoints();
+        }
         (this->points) += points_to_add;
         return *this;
     }
 
-   int operator+(const int points, const Skill& skill)
+   Skill& operator+(const int points, Skill& skill)
    {
-       return points+(skill.getRequiredPoints());
+       skill += points;
+       return skill;
    }
 
-    int operator+(const Skill& skill)
+    Skill& operator+(Skill& skill, const int points)
    {
-       return points+(skill.getRequiredPoints());
+      
+       skill += points;
+       return skill;
    }
+
+   ostream& operator<<(ostream& os, const Skill& my_skill)
+   {
+       return os<<my_skill.name;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

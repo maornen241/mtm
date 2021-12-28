@@ -1,5 +1,5 @@
-#include "../matamikya_tests.h"
-#include "../test_utilities.h"
+#include "matamikya_tests.h"
+#include "test_utilities.h"
 
 int main()
 {

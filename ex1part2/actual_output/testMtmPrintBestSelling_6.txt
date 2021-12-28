@@ -1,2 +1,0 @@
-Best Selling Product:
-name: Red Bull, id: 115, total income: 105000.015

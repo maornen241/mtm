@@ -1,7 +1,10 @@
 {
     "files.associations": {
         "stdbool.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "iosfwd": "cpp",
+        "exception": "cpp",
+        "iostream": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/ex1"
 }
