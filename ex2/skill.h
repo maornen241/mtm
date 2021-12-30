@@ -1,3 +1,6 @@
+#ifndef __SKILL_H__
+#define __SKILL_H__
+
 #include <iostream>
 
 using std::cout;
@@ -10,8 +13,8 @@ namespace mtm{
 
     class Skill
     {
-        const int id;
-        const string name;
+        int id;
+        string name;
         int points;
 
         public:
@@ -38,6 +41,7 @@ namespace mtm{
         bool operator!=(const Skill& skill_to_check);
         Skill operator++(int);
         Skill& operator+=(const int points_to_add);
+        Skill& operator=(const Skill& skill);
 
         
 
@@ -52,3 +56,4 @@ namespace mtm{
 
 
 }
+#endif

@@ -98,6 +98,19 @@ namespace mtm
        return os<<my_skill.name;
    }
 
+    Skill& Skill::operator=(const Skill& skill)
+    {
+        if(this == &skill)
+        {
+            return *this;
+        }
+
+        id = skill.getId();
+        points = skill.getRequiredPoints();
+        name = skill.getName();
+
+        return *this;
+    }
 
 
 

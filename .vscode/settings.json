@@ -4,7 +4,8 @@
         "assert.h": "c",
         "iosfwd": "cpp",
         "exception": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ostream": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/ex1"
 }

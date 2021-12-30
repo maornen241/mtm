@@ -1,19 +1,23 @@
+#ifndef __EMPLOYEE_H__
+#define __EMPLOYEE_H__
+
 #include <iostream>
 #include "skill.h"
 #include <vector>
 #include <algorithm>
+#include "citizen.h"
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
 using std::ostream;
-using std::vector<Skill>;
+using std::vector;
 
 
 namespace mtm
 {
-    class Employee:public Citizen
+    class Employee : public Citizen
     {
         int salary;
         int score;
@@ -41,8 +45,8 @@ namespace mtm
         void setSalary(const int raise);
         void setScore(const int score_to_add);
 
-        virtual ostream printShort(ostream os);
-        virtual ostream printLong(ostream os);
+        virtual ostream& printShort(ostream& os) const override;
+        virtual ostream& printLong(ostream& os) const override;
 
         virtual Citizen* clone();
         
@@ -68,3 +72,4 @@ namespace mtm
 
 
 }
+#endif

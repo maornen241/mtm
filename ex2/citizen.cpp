@@ -8,7 +8,7 @@ namespace mtm
             const string last_name,
             const  int birth_year):
             id(id), first_name(first_name),
-            last_name(last_name), birth_year(birth_year){};
+            last_name(last_name), birth_year(birth_year){}
 
     
     
@@ -56,6 +56,18 @@ namespace mtm
         return ((this->id) != citizen_to_check.id);
     }
 
+    ostream& Citizen::printShort(ostream& os) const
+    {
+        os<<first_name<<" "<<last_name<<endl;
+        return os;
+    }
+    ostream& Citizen::printLong(ostream& os) const
+    {
+        os<<first_name<<" "<<last_name<<endl;
+        os<<"id - "<<id<<" ";
+        os<<"birth_year - "<<birth_year<<endl;
+        return os;
+    }
 
 }
 

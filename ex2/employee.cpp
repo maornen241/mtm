@@ -1,12 +1,16 @@
 #include "employee.h"
+#include "citizen.h"
+using std::ostream;
+using std::cout;
+using std::endl;
 
 namespace mtm
 {
     Employee::Employee(const int id, const string first_name, 
             const string last_name, const int birth_year,
-            int salary=0, int score=0):
+            int salary, int score):
             Citizen(id, first_name, last_name, birth_year), 
-            salary(salary), score(score), skills()){};
+            salary(salary), score(score), skills(){}
             
 
     int Employee::getSalary() const
@@ -41,11 +45,11 @@ namespace mtm
         }
         
 
-        for(int i = 0; i < skills.size(); i++)
+        for(unsigned int i = 0; i < skills.size(); i++)
         {
             if((skills[i]).getId() == skill_id)
             {
-                skills.erase(skils.begin()+i);
+                skills.erase(skills.begin()+i);
             }
         }
 
@@ -54,7 +58,7 @@ namespace mtm
 
     bool Employee::hasSkill(const int skill_id) const
     {
-        for(int i = 0; i < skills.size(); i++)
+        for(unsigned int i = 0; i < skills.size(); i++)
         {
             if((skills[i]).getId() == skill_id)
             {
@@ -74,8 +78,29 @@ namespace mtm
         score += score_to_add;
     }
 
-    virtual ostream Employee::printShort(ostream os);
-    virtual ostream Employee::printLong(ostream os);
+    ostream& Employee::printShort(ostream& os) const
+    {
+        os<<getFirstName()<<" "<<getLastName()<<endl;
+        os<<"Salary: "<<salary<<" "<<"Score: "<<score<<endl;
+        return os;
+    }
+    ostream& Employee::printLong(ostream& os) const
+    {
+        os<<getFirstName()<<" "<<getLastName()<<endl;
 
-    virtual Citizen* Employee::clone();
+        os<<"id - "<<getId()<<" "<<"birth_year - "<<getBirthYear()<<endl;
+        os<<"Salary: "<<salary<<" "<<"Score: "<<score<<" "<<"Skills:"<<endl;
+        
+        for(unsigned int i = 0; i< skills.size(); i++)
+        {
+            os<<skills[i]<<endl;
+        }
+
+        return os;   
+    }
+
+    Citizen* Employee::clone()
+    {
+        return new Employee(*this);
+    }
 }

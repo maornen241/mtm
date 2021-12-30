@@ -1,3 +1,6 @@
+#ifndef __CITIZEN_H__
+#define __CITIZEN_H__
+
 #include <iostream>
 
 using std::cout;
@@ -22,7 +25,7 @@ namespace mtm
                 const int birth_year);
         
         Citizen() = delete;
-        Citizen(const Citizen&) = delete;
+        //Citizen(const Citizen&) = delete;
         virtual ~Citizen(){};
 
         const int getId() const;
@@ -37,8 +40,8 @@ namespace mtm
         bool operator==(const Citizen& citizen_to_check);
         bool operator!=(const Citizen& citizen_to_check);
         
-        virtual ostream printShort(ostream os);
-        virtual ostream printLong(ostream os);
+        virtual ostream& printShort(ostream& os) const;
+        virtual ostream& printLong(ostream& os) const;
 
         virtual Citizen* clone()=0;
         
@@ -46,13 +49,6 @@ namespace mtm
 
 
 
-
-
-
-
-
-
-
-
-    
 }
+
+#endif
