@@ -1,7 +1,9 @@
-#ifndef __SKILL_H__
-#define __SKILL_H__
+#ifndef __SKILL__
+#define __SKILL__
 
 #include <iostream>
+#include "exceptions.h"
+
 
 using std::cout;
 using std::cin;
@@ -18,17 +20,14 @@ namespace mtm{
         int points;
 
         public:
-        class Exceptions: public std::exception{};
-        class NegativePoints:public Exceptions{};
+       
 
 
         Skill(const int id, const string name, int points_for_skill);
         Skill() = delete;
         Skill(const Skill&) = default;
 
-        //const int getId();
         const int getId() const;
-        //const string getName();
         const string getName() const;
         int getRequiredPoints() const;
 
@@ -56,4 +55,5 @@ namespace mtm{
 
 
 }
+
 #endif

@@ -2,12 +2,17 @@
 #define __CITIZEN_H__
 
 #include <iostream>
+#include "exceptions.h"
+#include <vector>
+#include <algorithm>
+
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
 using std::ostream;
+using std::vector;
 
 namespace mtm
 {

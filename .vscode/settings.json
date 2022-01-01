@@ -5,7 +5,8 @@
         "iosfwd": "cpp",
         "exception": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "vector": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/ex1"
 }

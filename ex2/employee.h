@@ -3,16 +3,9 @@
 
 #include <iostream>
 #include "skill.h"
-#include <vector>
-#include <algorithm>
 #include "citizen.h"
 
-using std::cout;
-using std::cin;
-using std::endl;
-using std::string;
-using std::ostream;
-using std::vector;
+
 
 
 namespace mtm
@@ -24,10 +17,7 @@ namespace mtm
         vector<Skill> skills;
         
         public:
-        class Exceptions: public std::exception{};
-        class SkillAlreadyLearned:public Exceptions{};
-        class CanNotLearnSkill:public Exceptions{};
-        class DidNotLearnSkill:public Exceptions{};
+        
 
         Employee(const int id, const string first_name, 
                 const string last_name, const int birth_year,

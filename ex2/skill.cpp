@@ -98,6 +98,7 @@ namespace mtm
        return os<<my_skill.name;
    }
 
+
     Skill& Skill::operator=(const Skill& skill)
     {
         if(this == &skill)
