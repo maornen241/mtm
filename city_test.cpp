@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Employee.h"
+#include "employee.h"
 #include "Manager.h"
 #include "WorkPlace.h"
 #include "City.h"
@@ -10,9 +10,10 @@ using std::cout;
 using std::endl;
 
 class FacultyCondition1: public Condition{
-    bool operator()(Employee* employee) override{
-        return employee->getId() > 0;
-    }
+    public:
+        bool operator()(Employee* employee) override{
+            return employee->getId() > 0;
+        }
 };
 
 class FacultyCondition2: public Condition{

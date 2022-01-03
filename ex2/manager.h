@@ -27,7 +27,7 @@ namespace mtm
         Manager(const Manager& manager) = default;
 
         int getSalary() const;
-        bool hasEmployee(const Employee* employee_ptr);
+        bool hasEmployee(const Employee* employee_ptr) const;
         void addEmployee(const Employee* employee_ptr);
         void removeEmployee(const int employee_id);
         void setSalary(const int raise);
@@ -36,7 +36,7 @@ namespace mtm
         virtual ostream& printShort(ostream& os) const override;
         virtual ostream& printLong(ostream& os) const override;
 
-        virtual Citizen* clone();
+        virtual Citizen* clone() override;
         
     };
     

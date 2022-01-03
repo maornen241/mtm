@@ -12,7 +12,7 @@ namespace mtm{
         return salary;
     }
 
-    bool Manager::hasEmployee(const Employee* employee_ptr)
+    bool Manager::hasEmployee(const Employee* employee_ptr) const
     {
         for(unsigned int i=0; i <employees.size() ; i++ )
         {

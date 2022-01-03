@@ -6,6 +6,7 @@
 #include "citizen.h"
 #include "employee.h"
 #include "manager.h"
+#include "faculty.h"
 
 using std::flush;
 
@@ -14,19 +15,13 @@ using std::flush;
 namespace mtm
 {
 
-    class Condition
-    {
-        public:
-            virtual bool operator()(Employee* employee) = 0;
-    };
-
 
 class Workplace
 {
     const int id;
     const string name;
     int workers_salary;
-    int manageres_salary;
+    int managers_salary;
     vector<Manager*> managers;
 
     bool hasManager(const int manager_id) const;
@@ -38,12 +33,13 @@ class Workplace
     Workplace(const Workplace& workplace) = default;
     ~Workplace() = default;
 
-    int getId();
-    string getName();
-    int getWorkersSalary();
-    int getManagerSalary();
-    void hireEmployee(Condition* hiring_condition,
-                      Employee* employee_ptr, const int manager_id);
+    int getId() const;
+    string getName() const;
+    int getWorkersSalary() const;
+    int getManagerSalary() const;
+    template <class T>
+    void hireEmployee(T condition, Employee* employee_ptr,
+                       const int manager_id);
     void hireManager(Manager* manager_ptr);
     void fireEmployee(const int employee_id ,const int manager_id);
     void fireManager(const int manager_id);
@@ -52,6 +48,19 @@ class Workplace
 };
 
     ostream& operator<<(ostream& os, const Workplace& workplace);
+    
+    template <class T>
+    void Workplace::hireEmployee(T condition, Employee* employee_ptr,
+                                 const int manager_id)
+    {
+        if(condition(employee_ptr) == false)
+        {
+            throw EmployeeNotSelected();
+        }
+        Manager* manager_ptr = giveManager(manager_id);
+        manager_ptr->addEmployee(employee_ptr);
+        
+    }
 
 
 

@@ -38,7 +38,7 @@ namespace mtm
         virtual ostream& printShort(ostream& os) const override;
         virtual ostream& printLong(ostream& os) const override;
 
-        virtual Citizen* clone();
+        virtual Citizen* clone() override;
         
     };
     

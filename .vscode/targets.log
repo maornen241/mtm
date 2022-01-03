@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jan  1 21:00:12 2022
+# Make data base, printed on Mon Jan  3 22:06:14 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 VSCODE_CWD = /home/maorben
 # environment
-SSH_CONNECTION = 132.69.237.205 60001 132.68.32.76 22
+SSH_CONNECTION = 132.69.236.157 51395 132.68.32.76 22
 # environment
 PATH = /home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/bin/:/home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/lib64/qt-3.3/bin:/usr/bin/:/usr/local/bin:/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/sbin:/usr/local/pgsql/bin:/home/maorben/bin
 # environment
@@ -69,7 +69,7 @@ VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /home/maorben/mtm
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-ac1d557c-a68f-4b53-9411-6d1cc263ea3f.sock
+VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-9607d29c-74fc-4fbf-a99b-885f483dd9ed.sock
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -99,7 +99,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 5
 # environment
-XDG_SESSION_ID = 71061
+XDG_SESSION_ID = 77157
 # environment
 USER = maorben
 # environment
@@ -117,7 +117,7 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # environment
-SSH_CLIENT = 132.69.237.205 60001 22
+SSH_CLIENT = 132.69.236.157 51395 22
 # environment
 MAIL = /var/spool/mail/maorben
 # automatic
@@ -224,7 +224,7 @@ GNUmakefile:
 
 # strcache hash-table stats:
 # Load=19/8192=0%, Rehash=0, Collisions=1/22=5%
-# Finished Make data base on Sat Jan  1 21:00:12 2022
+# Finished Make data base on Mon Jan  3 22:06:14 2022
 
  
 make: *** No rule to make target `all'.  Stop.

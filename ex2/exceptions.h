@@ -15,6 +15,7 @@ class EmployeeNotSelected: public Exceptions{};
 class ManagerIsNotHired: public Exceptions{};
 class ManagerAlreadyHired: public Exceptions{};
 class CanNotHireManager: public Exceptions{};
+class EmployeeNotAccepted: public Exceptions{};
 
 
 }

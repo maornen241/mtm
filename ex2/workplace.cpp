@@ -6,38 +6,26 @@ namespace mtm
     Workplace::Workplace(const int id, const string& name,
      const int workers_salary, const int managers_salary):
      id(id), name(name), workers_salary(workers_salary),
-     managers_salasry(managers_salary), managers(){}
+     managers_salary(managers_salary), managers(){}
     
-    int Workplace::getId()
+    int Workplace::getId() const
     {
         return id;
     }
-    string Workplace::getName()
+    string Workplace::getName() const
     {
         return name;
     }
     
-    int Workplace::getWorkersSalary()
+    int Workplace::getWorkersSalary() const
     {
         return workers_salary;
     }
-    int Workplace::getManagerSalary()
+    int Workplace::getManagerSalary() const
     {
         return managers_salary;
     }
 
-
-    void Workplace::hireEmployee(Condition* hiring_condition, 
-                                 Employee* employee_ptr, const int manager_id)
-    {
-        if((*hiring_condition)(employee_ptr) == false)
-        {
-            throw EmployeeNotSelected();
-        }
-        Manager* manager_ptr = giveManager(manager_id);
-        manager_ptr->addEmployee(employee_ptr);
-        
-    }
 
     void Workplace::hireManager(Manager* manager_ptr)
     {
@@ -62,7 +50,7 @@ namespace mtm
     {
         for(unsigned int i = 0; i < managers.size(); i++)
         {
-            if(managers[i]->getId == manager_id)
+            if(managers[i]->getId() == manager_id)
             {
                 managers.erase(managers.begin()+i);
                 return;
@@ -73,7 +61,7 @@ namespace mtm
 
     ostream& operator<<(ostream& os, const Workplace& workplace)
     {
-        os<<"Workplace name - "<<name<<flush;
+        os<<"Workplace name - "<<workplace.getName()<<flush;
 
         if((workplace.managers).empty() == false)
         {
@@ -105,7 +93,7 @@ namespace mtm
 
         for(unsigned int i = 0; i < managers.size(); i++)
          {
-             if( (managers[i]).getId() == manager_id)
+             if( (managers[i])->getId() == manager_id)
              {
                  return managers[i];
              }
