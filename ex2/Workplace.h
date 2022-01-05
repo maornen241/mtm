@@ -2,11 +2,11 @@
 #define __WORKPLACE__
 
 #include <iostream>
-#include "skill.h"
-#include "citizen.h"
-#include "employee.h"
-#include "manager.h"
-#include "faculty.h"
+#include "Skill.h"
+#include "Citizen.h"
+#include "Employee.h"
+#include "Manager.h"
+#include "Faculty.h"
 
 using std::flush;
 
@@ -43,6 +43,8 @@ class Workplace
     void hireManager(Manager* manager_ptr);
     void fireEmployee(const int employee_id ,const int manager_id);
     void fireManager(const int manager_id);
+
+    bool hasEmployee(Employee* employee) const;
 
     friend ostream& operator<<(ostream& os, const Workplace& workplace);
 };

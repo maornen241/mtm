@@ -1,7 +1,7 @@
 #include <iostream>
-#include "employee.h"
+#include "Employee.h"
 #include "Manager.h"
-#include "WorkPlace.h"
+#include "Workplace.h"
 #include "City.h"
 #include <assert.h>
 #include "exceptions.h"
@@ -17,9 +17,10 @@ class FacultyCondition1: public Condition{
 };
 
 class FacultyCondition2: public Condition{
-    bool operator()(Employee* employee) override{
-        return employee->getId() > 3;
-    }
+    public:
+        bool operator()(Employee* employee) override{
+            return employee->getId() > 3;
+        }
 };
 
 class HiringCondition {

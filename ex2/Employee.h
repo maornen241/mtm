@@ -2,8 +2,8 @@
 #define __EMPLOYEE_H__
 
 #include <iostream>
-#include "skill.h"
-#include "citizen.h"
+#include "Skill.h"
+#include "Citizen.h"
 
 
 
@@ -31,7 +31,7 @@ namespace mtm
 
         void learnSkill(const Skill skill);
         void forgetSkill(const int skill_id);
-        bool hasSkill(const int skill_id) const;
+        virtual bool hasSkill(const int skill_id) const override;
         void setSalary(const int raise);
         void setScore(const int score_to_add);
 

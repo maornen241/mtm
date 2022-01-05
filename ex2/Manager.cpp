@@ -1,4 +1,4 @@
-#include "manager.h"
+#include "Manager.h"
 #include "exceptions.h"
 
 
@@ -54,6 +54,10 @@ namespace mtm{
     void Manager::setSalary(const int raise)
     {
         salary += raise;
+        if(salary < 0 )
+        {
+            salary = 0;
+        }
     }
     
     ostream& Manager::printShort(ostream& os) const

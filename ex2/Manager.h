@@ -2,9 +2,9 @@
 #define __MANAGER_H__
 
 #include <iostream>
-#include "citizen.h"
-#include "employee.h"
-#include "skill.h"
+#include "Citizen.h"
+#include "Employee.h"
+#include "Skill.h"
 #include "exceptions.h"
 
 

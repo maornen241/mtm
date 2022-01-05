@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "skill.h"
+#include "Skill.h"
 
 using std::cout;
 using std::cin;

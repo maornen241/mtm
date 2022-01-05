@@ -1,4 +1,4 @@
-#include "workplace.h"
+#include "Workplace.h"
 #include "exceptions.h"
 
 namespace mtm
@@ -101,6 +101,17 @@ namespace mtm
          throw ManagerIsNotHired();
     }
 
+    bool Workplace::hasEmployee(Employee* employee) const
+    {
+        for(Manager* manager_ptr : managers)
+        {
+            if(manager_ptr->hasEmployee(employee))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 

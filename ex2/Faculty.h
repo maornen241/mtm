@@ -1,33 +1,26 @@
 #ifndef __FACULTY_H__
 #define __FACULTY_H__
 
-#include "employee.h"
-#include "citizen.h"
-#include "manager.h"
-#include "skill.h"
-#include "workplace.h"
+#include "Employee.h"
+#include "Citizen.h"
+#include "Manager.h"
+#include "Skill.h"
+#include "Workplace.h"
 
 namespace mtm
 {
-
-    class Condition
-    {
-        public:
-            virtual bool operator()(Employee* employee) = 0;
-    }; 
-
 
     template <class T>
     class Faculty
     {
         const int id;
-        T& condition;
+        T* condition_ptr;
         const Skill& skill;
         int added_points;
 
         
     public:
-        Faculty(const int id, T& condition,
+        Faculty(const int id, T* condition_ptr, 
                 const Skill& skill, int added_points);
         ~Faculty() = default;
         Faculty(const Faculty& faculty) = default;
@@ -40,9 +33,9 @@ namespace mtm
     };
 
     template <class T>
-    Faculty<T>::Faculty(const int id, T& condition,
+    Faculty<T>::Faculty(const int id, T* condition_ptr,
                     const Skill& skill, int added_points):
-                    id(id), condition(condition),
+                    id(id), condition_ptr(condition_ptr),
                      skill(skill), added_points(added_points){}
 
     template <class T>
@@ -66,7 +59,7 @@ namespace mtm
     template <class T>
     void Faculty<T>::teach(Employee* employee_ptr) const
     {
-       if(condition(employee_ptr) == false)
+       if((*condition_ptr)(employee_ptr) == false)
        {
            throw EmployeeNotAccepted();
        } 

@@ -16,6 +16,21 @@ class ManagerIsNotHired: public Exceptions{};
 class ManagerAlreadyHired: public Exceptions{};
 class CanNotHireManager: public Exceptions{};
 class EmployeeNotAccepted: public Exceptions{};
+class EmployeeAlreadyExists: public Exceptions{};
+class ManagerAlreadyExists: public Exceptions{};
+class FacultyAlreadyExists: public Exceptions{};
+class WorkplaceAlreadyExists: public Exceptions{};
+class EmployeeDoesNotExist: public Exceptions{};
+class ManagerDoesNotExist: public Exceptions{};
+class WorkplaceDoesNotExist: public Exceptions{};
+class CitizenAlreadyExists: public Exceptions{};
+class FacultyDoesNotExist: public Exceptions{};
+
+
+
+
+
+
 
 
 }

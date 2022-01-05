@@ -38,6 +38,8 @@ namespace mtm
         const string& getLastName() const;
         const int getBirthYear() const;
 
+        //maybe add getSalary as pure virtual
+
         bool operator<(const Citizen& citizen_to_check);
         bool operator>(const Citizen& citizen_to_check);
         bool operator<=(const Citizen& citizen_to_check);
@@ -49,6 +51,11 @@ namespace mtm
         virtual ostream& printLong(ostream& os) const;
 
         virtual Citizen* clone()=0;
+        
+        virtual bool hasSkill(const int skill_id) const
+        {
+            return false;
+        }
         
     };
 

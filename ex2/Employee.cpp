@@ -1,5 +1,5 @@
-#include "employee.h"
-#include "citizen.h"
+#include "Employee.h"
+#include "Citizen.h"
 using std::ostream;
 using std::cout;
 using std::endl;
@@ -71,11 +71,19 @@ namespace mtm
     void Employee::setSalary(const int raise)
     {
         salary += raise;
+        if ( salary < 0 )
+        {
+            salary = 0;
+        }
     }
 
     void Employee::setScore(const int score_to_add)
     {
         score += score_to_add;
+        if(score < 0 )
+        {
+            score = 0;
+        }
     }
 
     ostream& Employee::printShort(ostream& os) const
