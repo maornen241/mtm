@@ -37,12 +37,14 @@ namespace mtm
         {
             throw CanNotHireManager();
         }
+        manager_ptr->setSalary(managers_salary);
         managers.push_back(manager_ptr);
     }
 
     void Workplace::fireEmployee(const int employee_id ,const int manager_id)
     {
         Manager* manager_ptr = giveManager(manager_id);//throws exception if manager not exist
+        manager_ptr->setSalary(-workers_salary);
         manager_ptr->removeEmployee(employee_id);//throws exception if employee not exist
     }
 
@@ -52,6 +54,7 @@ namespace mtm
         {
             if(managers[i]->getId() == manager_id)
             {
+                (managers[i])->setSalary(-managers_salary);
                 managers.erase(managers.begin()+i);
                 return;
             }

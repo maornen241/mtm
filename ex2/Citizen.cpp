@@ -31,27 +31,27 @@ namespace mtm
     }
 
 
-    bool Citizen::operator<(const Citizen& citizen_to_check)
+    bool Citizen::operator<(const Citizen& citizen_to_check) const
     {
         return ((this->id) < citizen_to_check.id);
     }
-    bool Citizen::operator>(const Citizen& citizen_to_check)
+    bool Citizen::operator>(const Citizen& citizen_to_check) const
     {
         return ((this->id) > citizen_to_check.id);
     }
-    bool Citizen::operator<=(const Citizen& citizen_to_check)
+    bool Citizen::operator<=(const Citizen& citizen_to_check) const
     {
         return ((this->id) <= citizen_to_check.id);
     }
-    bool Citizen::operator>=(const Citizen& citizen_to_check)
+    bool Citizen::operator>=(const Citizen& citizen_to_check) const
     {
        return ((this->id) >= citizen_to_check.id); 
     }
-    bool Citizen::operator==(const Citizen& citizen_to_check)
+    bool Citizen::operator==(const Citizen& citizen_to_check) const
     {
         return ((this->id) == citizen_to_check.id);
     }
-    bool Citizen::operator!=(const Citizen& citizen_to_check)
+    bool Citizen::operator!=(const Citizen& citizen_to_check) const
     {
         return ((this->id) != citizen_to_check.id);
     }

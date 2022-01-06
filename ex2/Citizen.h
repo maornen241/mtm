@@ -40,12 +40,12 @@ namespace mtm
 
         //maybe add getSalary as pure virtual
 
-        bool operator<(const Citizen& citizen_to_check);
-        bool operator>(const Citizen& citizen_to_check);
-        bool operator<=(const Citizen& citizen_to_check);
-        bool operator>=(const Citizen& citizen_to_check);
-        bool operator==(const Citizen& citizen_to_check);
-        bool operator!=(const Citizen& citizen_to_check);
+        bool operator<(const Citizen& citizen_to_check) const;
+        bool operator>(const Citizen& citizen_to_check) const;
+        bool operator<=(const Citizen& citizen_to_check) const;
+        bool operator>=(const Citizen& citizen_to_check) const;
+        bool operator==(const Citizen& citizen_to_check) const;
+        bool operator!=(const Citizen& citizen_to_check) const;
         
         virtual ostream& printShort(ostream& os) const;
         virtual ostream& printLong(ostream& os) const;

@@ -1,0 +1,36 @@
+1c1
+< getAllAboveSalary output: 
+---
+> getAllAboveSalary output:
+4,5d3
+< Alex Martinez
+< Salary: 10000 Score: 10
+9c7
+< Salary: 10000
+---
+> Salary: 20000
+15,22c13
+< Salary: 10000 Score: 10
+< Lionel Smith
+< Salary: 10000 Score: 10
+< getAllAboveSalary output: 
+< John Williams
+< Salary: 10000 Score: 25
+< Alex Martinez
+< Salary: 10000 Score: 10
+---
+> Salary: 0 Score: 10
+24a16
+> getAllAboveSalary output:
+28c20
+< Salary: 10000 Score: 25
+---
+> Salary: 0 Score: 25
+30c22
+< Salary: 10000 Score: 10
+---
+> Salary: 0 Score: 10
+32c24
+< Salary: 10000 Score: 10
+---
+> Salary: 0 Score: 10

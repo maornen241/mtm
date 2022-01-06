@@ -60,6 +60,7 @@ class Workplace
             throw EmployeeNotSelected();
         }
         Manager* manager_ptr = giveManager(manager_id);
+        employee_ptr->setSalary(workers_salary);
         manager_ptr->addEmployee(employee_ptr);
         
     }

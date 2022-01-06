@@ -6,78 +6,73 @@ using std::sort;
 
 namespace mtm
 {
+        bool compareCitizensFunc(Citizen* citizen1, Citizen* citizen2) 
+        {
+            return (citizen1->getId() < citizen2->getId());
+        }
 
         City::City(const string name):
-                name(name), citizens(), faculties(), workplaces(){}
+                name(name), employees(), managers(), faculties(), workplaces(){}
 
 
 
         void  City::addEmployee(const int id, const string& first_name,
                                 const string& last_name, const int birth_year)
         {
-                isEqualById is_equal_employee(id);
-                std::vector<Citizen*>::iterator employee_it = citizens.begin();
-                employee_it = std::find_if(citizens.begin(), citizens.end(), is_equal_employee);
-                if(employee_it != citizens.end())
+
+                if(isIdInVector<Employee>(employees, id) == true)
                 {
                         throw CitizenAlreadyExists();
                 }
-                
-                Employee employee(id, first_name, last_name, birth_year);
-                citizens.push_back(&employee);
+                Employee* employee_ptr = new Employee(id, first_name, last_name, birth_year);
+                employees.push_back(employee_ptr);
         }
-
-
-
-
-    void City::addFaculty(const int id, Condition* condition_ptr,
-                    const Skill& skill, int added_points)
-    {
-        isEqualById is_equal_faculty(id);
-        std::vector<Faculty<Condition>*>::iterator it = faculties.begin();
-        it = std::find_if(faculties.begin(), faculties.end(), is_equal_faculty);
-
-        if(it != faculties.end())
-        {
-            throw FacultyAlreadyExists();
-        }
-
-        Faculty<Condition> faculty(id, condition_ptr, skill, added_points);
-        faculties.push_back(&faculty);
-    }
 
 
         void  City::addManager(const int id, const string& first_name,
                                 const string& last_name, const int birth_year)
         {
-                isEqualById is_equal_manager(id);
-                std::vector<Citizen*>::iterator manager_it = citizens.begin();
-                manager_it = std::find_if(citizens.begin(), citizens.end(),
-                                          is_equal_manager);
-                if(manager_it != citizens.end())
+
+                if(isIdInVector<Manager>(managers, id) == true)
                 {
                         throw CitizenAlreadyExists();
                 }
-                
-                Manager manager(id, first_name, last_name, birth_year);
-                citizens.push_back(&manager);
+
+                Manager* manager_ptr = new Manager(id, first_name, last_name, birth_year);
+                managers.push_back(manager_ptr);
+
+        }
+
+
+
+
+        void City::addFaculty(const int id ,const Skill& skill,
+                              int added_points, Condition* condition_ptr)
+        {
+                if(isIdInVector<Faculty<Condition> >(faculties, id) == true)
+                {
+                        throw FacultyAlreadyExists();
+                }
+
+                Faculty<Condition>* faculty_ptr = 
+                                new Faculty<Condition>(id, condition_ptr, skill, added_points);
+                faculties.push_back(faculty_ptr);
+
         }
 
 
         void  City::createWorkplace(const int id, const string& name,
                                 const int workers_salary, const int managers_salary)
         {
-                isEqualById is_equal_workplace(id);
-                std::vector<Workplace*>::iterator workplace_it = workplaces.begin();
-                workplace_it = std::find_if(workplaces.begin(), workplaces.end(), 
-                                            is_equal_workplace);
-                if(workplace_it != workplaces.end())
+
+               if(isIdInVector<Workplace>(workplaces, id) == true)
                 {
                         throw WorkplaceAlreadyExists();
                 }
+
+                Workplace* workplace_ptr = new Workplace(id, name, workers_salary, managers_salary);
+                workplaces.push_back(workplace_ptr);
                 
-                Workplace workplace(id, name, workers_salary, managers_salary);
-                workplaces.push_back(&workplace);
         }
 
 
@@ -85,25 +80,13 @@ namespace mtm
 
         void  City::teachAtFaculty(const int worker_id, const int faculty_id)
         {
-                isEqualById is_equal_employee(worker_id);
-                std::vector<Citizen*>::iterator employee_it = citizens.begin();
-                employee_it = std::find_if(citizens.begin(), citizens.end(), is_equal_employee);
-                if(employee_it == citizens.end())
-                {
-                        throw EmployeeDoesNotExist();
-                }
-
-                isEqualById is_equal_faculty(faculty_id);
-                std::vector<Faculty<Condition>*>::iterator faculty_it = faculties.begin();
-                faculty_it = std::find_if(faculties.begin(), faculties.end(),
-                                         is_equal_faculty);
-                if(faculty_it == faculties.end())
-                {
-                        throw FacultyDoesNotExist();
-                }
-
-                (*faculty_it)->teach(*employee_it);
-
+        //giveById<Employee, EmployeeDoesNotExist> give_employee();     
+           Employee* employee_ptr = giveById<Employee, EmployeeDoesNotExist>(
+                                                employees, worker_id);
+           Faculty<Condition>* faculty_ptr = giveById< Faculty<Condition>, FacultyDoesNotExist >(
+                                              faculties, faculty_id);
+        
+           faculty_ptr->teach(employee_ptr);
         }
 
 
@@ -112,25 +95,12 @@ namespace mtm
 
         void  City::hireManagerAtWorkplace(const int manager_id, const int workplace_id)
         {
-                isEqualById is_equal_manager(manager_id);
-                std::vector<Citizen*>::iterator manager_it = citizens.begin();
-                manager_it = std::find_if(citizens.begin(), citizens.end(), is_equal_manager);
-                if(manager_it == citizens.end())
-                {
-                        throw ManagerDoesNotExist();
-                }
-                
-                isEqualById is_equal_workplace(workplace_id);
-                std::vector<Workplace*>::iterator workplace_it = workplaces.begin();
-                workplace_it = std::find_if(workplaces.begin(), workplaces.end(),
-                                            is_equal_workplace);
-                if(workplace_it == workplaces.end())
-                {
-                        throw WorkplaceDoesNotExist();
-                }
+                Manager* manager_ptr = giveById<Manager, ManagerDoesNotExist>(managers, manager_id);
+                Workplace* workplace_ptr = giveById<Workplace, WorkplaceDoesNotExist>(
+                                                workplaces, workplace_id);
 
-                (*workplace_it)->hireManager(*manager_it);
-                
+                workplace_ptr->hireManager(manager_ptr);
+                 
         }
 
 
@@ -139,32 +109,13 @@ namespace mtm
         void  City::fireEmployeeAtWorkplace(const int worker_id, const int manager_id,
                                         const int workplace_id)
         {
-                isEqualById is_equal_worker(worker_id);
-                std::vector<Citizen*>::iterator employee_it = citizens.begin();
-                employee_it = std::find_if(citizens.begin(), citizens.end(), is_equal_worker);
-                if(employee_it == citizens.end())
-                {
-                        throw EmployeeDoesNotExist();
-                }
+                giveById<Employee, EmployeeDoesNotExist>(employees, worker_id);
+                giveById<Manager, ManagerDoesNotExist>(managers, manager_id);
 
-                isEqualById is_equal_manager(manager_id);
-                std::vector<Citizen*>::iterator manager_it = citizens.begin();
-                manager_it = std::find_if(citizens.begin(), citizens.end(), is_equal_manager);
-                if(manager_it == citizens.end())
-                {
-                        throw ManagerDoesNotExist();
-                }
+                Workplace* workplace_ptr = giveById<Workplace, WorkplaceDoesNotExist>(
+                                               workplaces, workplace_id);
 
-                isEqualById is_equal_workplace(workplace_id);
-                std::vector<Workplace*>::iterator workplace_it = workplaces.begin();
-                workplace_it = std::find_if(workplaces.begin(), workplaces.end(),
-                                            is_equal_workplace);
-                if(workplace_it == workplaces.end())
-                {
-                        throw WorkplaceDoesNotExist();
-                }
-
-                (*workplace_it)->fireEmployee(worker_id , manager_id);
+                workplace_ptr->fireEmployee(worker_id, manager_id);
                 
         }  
            
@@ -172,24 +123,11 @@ namespace mtm
         
         void  City::fireManagerAtWorkplace(const int manager_id, const int workplace_id)
         {
-                isEqualById is_equal_manager(manager_id);
-                std::vector<Citizen*>::iterator manager_it = citizens.begin();
-                manager_it = std::find_if(citizens.begin(), citizens.end(), is_equal_manager);
-                if(manager_it == citizens.end())
-                {
-                        throw ManagerDoesNotExist();
-                }
+                giveById<Manager, ManagerDoesNotExist>(managers, manager_id); 
+                Workplace* workplace_ptr = giveById<Workplace, WorkplaceDoesNotExist>(
+                                               workplaces, workplace_id);
 
-                isEqualById is_equal_workplace(workplace_id);
-                std::vector<Workplace*>::iterator workplace_it = workplaces.begin();
-                workplace_it = std::find_if(workplaces.begin(), workplaces.end(),
-                                        is_equal_workplace);
-                if(workplace_it == workplaces.end())
-                {
-                        throw WorkplaceDoesNotExist();
-                }
-
-                (*workplace_it)->fireManager(manager_id);
+                workplace_ptr->fireManager(manager_id);
         }
 
         
@@ -199,41 +137,58 @@ namespace mtm
         
         int  City::getAllAboveSalary(ostream& os, const int salary) const
         {
-            CompareCitizensById compare_by_id();    
-            sort(citizens.begin(), citizens.end(), compare_by_id);
-
-            for(Citizen* citizen_ptr : citizens)
-            {
-                if(citizen_ptr->getSalary() > salary)
-                {
-                        citizen_ptr->printShort(os);
-                }
-            }    
                 
+            int counter=0;    
+            vector<Citizen*> above_salary;
+
+            for(Employee* employee_ptr : employees)
+            {
+                    if(employee_ptr->getSalary() >= salary)
+                    {
+                            above_salary.push_back(employee_ptr);
+                            counter++;
+                    }
+            }
+
+          for(Manager* manager_ptr : managers)
+            {
+                    if(manager_ptr->getSalary() >= salary)
+                    {
+                            above_salary.push_back(manager_ptr);
+                            counter++;
+                    }
+            }
+        
+          
+          sort(above_salary.begin(), above_salary.end(), compareCitizensFunc);
+
+          for(Citizen* citizen : above_salary)
+          {
+              citizen->printShort(os);
+          }
+            return counter;
         }
+
+        //     CompareCitizensById compare_by_id();
+        //     sort(above_salary.begin(), above_salary.end(), compare_by_id);
+
+        //     for(Citizen* citizen_ptr : above_salary)
+        //     {
+        //             citizen_ptr->printShort(os);
+        //     }
+                
+        
 
         bool  City::isWorkingInTheSameWorkplace(const int id1, const int id2) const
         {
-                isEqualById is_equal1(id1);
-                std::vector<Citizen*>::iterator employee_it1 = citizens.begin();
-                employee_it1 = std::find_if(citizens.begin(), citizens.end(), is_equal1);
-                if(employee_it1 == citizens.end())
-                {
-                        throw EmployeeDoesNotExist();
-                }
-                
-                isEqualById is_equal2(id2);
-                std::vector<Citizen*>::iterator employee_it2 = citizens.begin();
-                employee_it2 = std::find_if(citizens.begin(), citizens.end(), is_equal2);
-                if(employee_it2 == citizens.end())
-                {
-                        throw EmployeeDoesNotExist();
-                }
+
+                Employee* employee1_ptr = giveById<Employee, EmployeeDoesNotExist>(employees, id1);
+                Employee* employee2_ptr = giveById<Employee, EmployeeDoesNotExist>(employees, id2);
 
                 for(Workplace* workplace_ptr : workplaces)
                 {
-                     if(workplace_ptr->hasEmployee(*employee_it1) &&
-                        workplace_ptr->hasEmployee(*employee_it2))
+                     if(workplace_ptr->hasEmployee(employee1_ptr) &&
+                        workplace_ptr->hasEmployee(employee2_ptr))
                      {
                         return true;
                      }   
@@ -243,11 +198,16 @@ namespace mtm
 
         void  City::printAllEmployeesWithSkill(ostream& os, const int skill_id) const 
         {
-             for(Citizen* citizen_ptr : citizens)
+             //CompareEmployeeById compare_employee();
+             vector<Employee*> new_employees = employees;
+             sort(new_employees.begin(), new_employees.end(), compareCitizensFunc);
+
+
+             for(Employee* employee_ptr : new_employees)
              {
-                     if(citizen_ptr->hasSkill(skill_id) == true)
+                     if(employee_ptr->hasSkill(skill_id) == true)
                      {
-                        citizen_ptr->printShort(os);
+                        employee_ptr->printShort(os);
                      }
              }   
         }

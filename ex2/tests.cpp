@@ -1,5 +1,5 @@
 // #include "Skill.h"
-// #include "citizen.h"
+// #include "Citizen.h"
 // #include "Employee.h"
 // #include "exceptions.h"
 // #include <iostream>
@@ -15,8 +15,6 @@
 
 // using namespace mtm;
 
-
-
 // class HiringCondition
 // {
 //     public:
@@ -26,16 +24,16 @@
 //         }
 // };
 
-// class FacultyCondition3: public Condition{
+// class FacultyCondition3{
 //     public:
-//         bool operator()(Employee* employee) override{
+//         bool operator()(Employee* employee){
 //             return employee->getId() > 0;
 //     }
 // };
 
-// class FacultyCondition4: public Condition{
+// class FacultyCondition4{
 //     public:
-//         bool operator()(Employee* employee) override{
+//         bool operator()(Employee* employee){
 //             return employee->getId() > 3;
 //     }
 // };
@@ -447,8 +445,8 @@
 //     FacultyCondition3 fc1;
 //     FacultyCondition4 fc2;
 
-//     Faculty<FacultyCondition3> py_faculty(1, fc1, python, 10);
-//     Faculty<FacultyCondition4> cpp_faculty(2, fc2, cpp, 10000);
+//     Faculty<FacultyCondition3> py_faculty(1, &fc1, python, 10);
+//     Faculty<FacultyCondition4> cpp_faculty(2, &fc2, cpp, 10000);
 
 //     Employee maor(1,"maor","ben eli",1991);
 //     maor.setScore(100);
