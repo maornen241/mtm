@@ -30,7 +30,7 @@ namespace mtm
                 const int birth_year);
         
         Citizen() = delete;
-        //Citizen(const Citizen&) = delete;
+        
         virtual ~Citizen(){};
 
         const int getId() const;
@@ -38,7 +38,7 @@ namespace mtm
         const string& getLastName() const;
         const int getBirthYear() const;
 
-        //maybe add getSalary as pure virtual
+    
 
         bool operator<(const Citizen& citizen_to_check) const;
         bool operator>(const Citizen& citizen_to_check) const;
@@ -52,7 +52,8 @@ namespace mtm
 
         virtual Citizen* clone()=0;
         
-        virtual bool hasSkill(const int skill_id) const
+        //a Citizen that is not an employee dosen't have skills
+        virtual bool hasSkill(const int skill_id) const  
         {
             return false;
         }

@@ -39,41 +39,8 @@ namespace mtm
 
 
 
-      
-      
-    //  class CompareManagerById
-    //  {
-    //      public:
-    //         bool operator()(manager manager1, manager manager2)
-    //         {
-    //             return (manager1.getId() < manager2.getId());
-    //         }
-    //   };
+  
 
-    //  class CompareCitizensById
-    //  {
-    //      public:
-    //         bool operator()(Citizen* citizen1, Citizen* citizen2) const
-    //         {
-    //             return (citizen1->getId() < citizen2->getId());
-    //         }
-    //   };
-
-    // class CompareEmployeeById
-    //  {
-    //      public:
-    //         bool operator()(Employee* employee1_ptr, Employee* employee2_ptr) const
-    //         {
-    //             return (employee1_ptr->getId() < employee2_ptr->getId());
-    //         }
-    //   };
-
-
-
-        // bool compareEmployeesFunc(Employee*  emp1, Employee*  emp2) 
-        // {
-        //     return (emp1->getId() < emp2->getId());
-        // }
 
     template <class Type, class Exception>
     Type* giveById(vector<Type*> my_vec, const int id) // לפצל לשתי פונקציות לא גנריות
@@ -116,7 +83,7 @@ namespace mtm
 
     public:
         City(const string name);
-        ~City() = default;
+        ~City();
         City(const City& city) = default;
 
         void addEmployee(const int id, const string& first_name,
