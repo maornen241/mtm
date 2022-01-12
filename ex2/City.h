@@ -43,7 +43,7 @@ namespace mtm
 
 
     template <class Type, class Exception>
-    Type* giveById(vector<Type*> my_vec, const int id) // לפצל לשתי פונקציות לא גנריות
+    Type* giveById(vector<Type*> my_vec, const int id) 
     {
         for(Type* current_ptr : my_vec)
         {
