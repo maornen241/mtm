@@ -1,26 +1,24 @@
 #include <iostream>
-#include "Employee.h"
-#include "Manager.h"
-#include "Workplace.h"
-#include "City.h"
-#include <assert.h>
-#include "exceptions.h"
+#include "../Employee.h"
+#include "../Manager.h"
+#include "../Faculty.h"
+#include "../Workplace.h"
+#include "../City.h"
+
 using namespace mtm;
 using std::cout;
 using std::endl;
 
 class FacultyCondition1: public Condition{
-    public:
-        bool operator()(Employee* employee) override{
-            return employee->getId() > 0;
-        }
+    bool operator()(Employee* employee) override{
+        return employee->getId() > 0;
+    }
 };
 
 class FacultyCondition2: public Condition{
-    public:
-        bool operator()(Employee* employee) override{
-            return employee->getId() > 3;
-        }
+    bool operator()(Employee* employee) override{
+        return employee->getId() > 3;
+    }
 };
 
 class HiringCondition {

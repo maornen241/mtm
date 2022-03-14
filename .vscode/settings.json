@@ -34,5 +34,6 @@
         "tuple": "cpp",
         "utility": "cpp"
     },
-    "cmake.sourceDirectory": "${workspaceFolder}/ex1"
+    "cmake.sourceDirectory": "${workspaceFolder}/ex1",
+    "C_Cpp.errorSquiggles": "Disabled"
 }

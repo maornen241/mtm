@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jan  6 21:00:14 2022
+# Make data base, printed on Sat Jan 22 21:00:14 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 VSCODE_CWD = /home/maorben
 # environment
-SSH_CONNECTION = 132.69.236.39 61100 132.68.32.76 22
+SSH_CONNECTION = 132.69.236.54 57259 132.68.32.76 22
 # environment
 PATH = /home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/bin/:/home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/lib64/qt-3.3/bin:/usr/bin/:/usr/local/bin:/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/sbin:/usr/local/pgsql/bin:/home/maorben/bin
 # environment
@@ -69,7 +69,7 @@ VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /home/maorben/mtm
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-98a767d7-db9c-4c7b-ba5a-63ae2b95c58f.sock
+VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-c40a93d3-1440-4981-9b63-0e80ba91db33.sock
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -99,7 +99,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 5
 # environment
-XDG_SESSION_ID = 87385
+XDG_SESSION_ID = 150573
 # environment
 USER = maorben
 # environment
@@ -117,7 +117,7 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # environment
-SSH_CLIENT = 132.69.236.39 61100 22
+SSH_CLIENT = 132.69.236.54 57259 22
 # environment
 MAIL = /var/spool/mail/maorben
 # automatic
@@ -159,9 +159,9 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 
 # Directories
 
-# . (device 46, inode 97946662): 9 files, no impossibilities.
+# . (device 46, inode 97946662): 12 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -217,14 +217,14 @@ GNUmakefile:
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 0 / lookups = 20 / hits = 20
+# # of strings in strcache: 0 / lookups = 23 / hits = 23
 # # of strcache buffers: 1 (* 8176 B/buffer = 8176 B)
-# strcache used: total = 0 (130) / max = 0 / min = 8176 / avg = 0
-# strcache free: total = 0 (8046) / max = 0 / min = 8176 / avg = 0
+# strcache used: total = 0 (153) / max = 0 / min = 8176 / avg = 0
+# strcache free: total = 0 (8023) / max = 0 / min = 8176 / avg = 0
 
 # strcache hash-table stats:
-# Load=17/8192=0%, Rehash=0, Collisions=1/20=5%
-# Finished Make data base on Thu Jan  6 21:00:14 2022
+# Load=20/8192=0%, Rehash=0, Collisions=1/23=4%
+# Finished Make data base on Sat Jan 22 21:00:14 2022
 
  
 make: *** No rule to make target `all'.  Stop.
