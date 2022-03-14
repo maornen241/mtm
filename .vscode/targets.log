@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jan 22 21:00:14 2022
+# Make data base, printed on Mon Mar 14 20:34:22 2022
 
 # Variables
 
@@ -51,9 +51,9 @@ LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 VSCODE_CWD = /home/maorben
 # environment
-SSH_CONNECTION = 132.69.236.54 57259 132.68.32.76 22
+SSH_CONNECTION = 132.69.236.26 58508 132.68.32.76 22
 # environment
-PATH = /home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/bin/:/home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/lib64/qt-3.3/bin:/usr/bin/:/usr/local/bin:/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/sbin:/usr/local/pgsql/bin:/home/maorben/bin
+PATH = /home/maorben/.vscode-server/bin/c722ca6c7eed3d7987c0d5c3df5c45f6b15e77d1/bin/remote-cli:/usr/bin/:/usr/lib64/qt-3.3/bin:/usr/bin/:/usr/local/bin:/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/sbin:/usr/local/pgsql/bin:/home/maorben/bin
 # environment
 QT_GRAPHICSSYSTEM_CHECKED = 1
 # environment
@@ -69,11 +69,11 @@ VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /home/maorben/mtm
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-c40a93d3-1440-4981-9b63-0e80ba91db33.sock
+VSCODE_IPC_HOOK_CLI = /run/user/20672/vscode-ipc-6e83dd6e-c356-4cb3-a27c-89a6035e46e8.sock
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/server/remoteExtensionHostProcess
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /home/maorben
 # environment
@@ -99,7 +99,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 5
 # environment
-XDG_SESSION_ID = 150573
+XDG_SESSION_ID = 10177
 # environment
 USER = maorben
 # environment
@@ -117,13 +117,13 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # environment
-SSH_CLIENT = 132.69.236.54 57259 22
+SSH_CLIENT = 132.69.236.26 58508 22
 # environment
 MAIL = /var/spool/mail/maorben
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-BROWSER = /home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin/helpers/browser.sh
+BROWSER = /home/maorben/.vscode-server/bin/c722ca6c7eed3d7987c0d5c3df5c45f6b15e77d1/bin/helpers/browser.sh
 # default
 MAKEFILES := 
 # automatic
@@ -139,8 +139,6 @@ HISTSIZE = 1000
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
-VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/maorben/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/remote/node_modules
-# environment
 QTINC = /usr/lib64/qt-3.3/include
 # default
 .RECIPEPREFIX := 
@@ -151,7 +149,7 @@ LANG = C
 # environment
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=8/89=9%
+# Load=69/1024=7%, Rehash=0, Collisions=8/88=9%
 
 # Pattern-specific Variable Values
 
@@ -159,7 +157,7 @@ VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 
 # Directories
 
-# . (device 46, inode 97946662): 12 files, no impossibilities.
+# . (device 48, inode 97946662): 12 files, no impossibilities.
 
 # 12 files, no impossibilities in 1 directories.
 
@@ -224,7 +222,7 @@ GNUmakefile:
 
 # strcache hash-table stats:
 # Load=20/8192=0%, Rehash=0, Collisions=1/23=4%
-# Finished Make data base on Sat Jan 22 21:00:14 2022
+# Finished Make data base on Mon Mar 14 20:34:22 2022
 
  
 make: *** No rule to make target `all'.  Stop.
